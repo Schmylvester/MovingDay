@@ -42,7 +42,7 @@ public class PlayerInteract : MonoBehaviour
     }
 
 
-    void DropObject()
+    public void DropObject()
     {
         if (grabbedObj != null)
         {

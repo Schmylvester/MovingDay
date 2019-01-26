@@ -73,17 +73,19 @@ public class PlayerCollision : MonoBehaviour
         switch (weight)
         {
             case WeightClass.Light:
-                knockForceMultiplier = 3f;
-                break;
-
-            case WeightClass.Medium:
                 knockForceMultiplier = 5f;
                 break;
 
+            case WeightClass.Medium:
+                knockForceMultiplier = 7.5f;
+                break;
+
             case WeightClass.Heavy:
-                knockForceMultiplier = 7f;
+                knockForceMultiplier = 10f;
                 break;
         }
+
+        GetComponent<PlayerInteract>().DropObject();
 
     }
 
