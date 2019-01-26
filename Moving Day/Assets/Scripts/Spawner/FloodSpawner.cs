@@ -30,6 +30,7 @@ public class FloodSpawner : MonoBehaviour {
                     Vector3 newForce = transform.right * -force.x;
                     newForce.y += force.y;
                     m_numberSpawned++;
+                    newForce.x = Mathf.Min(newForce.x, 20);
                     GetComponent<Spawner>().SpawnRandom(newForce);
                 }
                 m_timer = 0;

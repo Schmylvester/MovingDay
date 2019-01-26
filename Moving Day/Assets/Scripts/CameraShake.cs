@@ -37,7 +37,6 @@ public class CameraShake : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(originalPos + "!");
         if (shake_duration > 0)
         {
             camera.localPosition = originalPos + Random.insideUnitSphere * shake_amount;
