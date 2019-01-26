@@ -15,15 +15,15 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
 
     // Use this for initialization
-    void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    //delay so drop input isnt dected instantly (could be couroutine wait???)
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
         {
             InputManager iM = FindObjectOfType<InputManager>();
@@ -73,6 +73,7 @@ public class PlayerInteract : MonoBehaviour
 
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
                 grabbedObj.GetComponent<Rigidbody>().useGravity = false;
+                grabbedObj.GetComponent<ObjectData>().pickedUp();
                 grabbed = true;
 
                 playerAnimator.SetBool("IsHolding", true);
