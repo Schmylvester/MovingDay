@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
         }
 
-        SetGame(5, 1.0f, players.Length);
+        SetGame(5, 1.0f, 4);
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
