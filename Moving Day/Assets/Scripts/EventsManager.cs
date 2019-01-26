@@ -48,6 +48,7 @@ public class EventsManager : MonoBehaviour
 
     void Earthquake()
     {
+        if(camera_shake)
         camera_shake.SetShake(5, 0.7f);
         Debug.Log("EARTHQUAKE!");
     }
