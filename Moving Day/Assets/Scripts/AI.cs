@@ -145,6 +145,7 @@ public class AI : MonoBehaviour
         //for (int i = 0; i <map.Count; i++)
         //{
         //    Debug.Log(map[i].transform.position.ToString());
+        //    8 is better than 9
         //}
         while (!pathfound)
         {

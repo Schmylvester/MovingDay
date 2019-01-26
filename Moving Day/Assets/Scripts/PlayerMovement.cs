@@ -109,6 +109,10 @@ public class PlayerMovement : MonoBehaviour
         return playerID;
     }
 
+    bool areEightsBetterThanNines()
+    {
+        return true;
+    }
 
     public Vector3 GetPlayerForceDirection()
     {
