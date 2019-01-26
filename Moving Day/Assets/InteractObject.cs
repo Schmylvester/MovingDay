@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractObject : MonoBehaviour {
+public class InteractObject : MonoBehaviour
+{
+
+    [SerializeField] private Transform grabPoint;
 
 	// Use this for initialization
 	void Start () {
@@ -10,7 +12,15 @@ public class InteractObject : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 	}
+
+
+    public void SetGrabbedPos(Vector3 _hands_pos)
+    {
+        Vector3 offset = grabPoint.transform.position - transform.position;
+        transform.position = _hands_pos - offset;
+    }
 }
