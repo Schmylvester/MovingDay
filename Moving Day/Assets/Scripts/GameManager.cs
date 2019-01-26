@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public bool has_ended { get; set; }
 
+    bool winScene = false;
+
     [SerializeField] private bool has_started = false;
     [SerializeField] private EventsManager event_manager;
     [SerializeField] ScoreBar scoreBar;
 
-    private int clock_mins = 5;
+    private int clock_mins = 1;
     private float clock_secs = 1.0f;
 
     private float countdown_secs = 3.0f;
@@ -20,7 +23,15 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
     {
-        SetGame();
+        GameSettings settings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
+        if (settings)
+        {
+            SetGame(settings.m_minutes, settings.m_seconds, settings.m_players);
+        }
+        else
+        {
+            SetGame();
+        }
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -74,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGame(int mins = 5, float secs = 1.0f, int player_count = 1)
+    public void SetGame(int mins = 1, float secs = 1.0f, int player_count = 1)
     {
         SetPlayerCount(player_count);
         clock_mins = mins;
@@ -97,19 +108,23 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-        float high_score = float.MinValue;
-        int winner_id = -1;
-
-        for(uint i = 0; i < scores.Count; i++)
+        if (!winScene)
         {
-            if(scores[(int)i] >= high_score)
-            {
-                high_score = scores[(int)i];
-                winner_id = (int)i;
-            }
-        }
+            float high_score = float.MinValue;
+            int winner_id = -1;
 
-        Debug.Log("WINNER - " + winner_id);
+            for (uint i = 0; i < scores.Count; i++)
+            {
+                if (scores[(int)i] >= high_score)
+                {
+                    high_score = scores[(int)i];
+                    winner_id = (int)i;
+                }
+            }
+            SceneManager.LoadScene("WinScene");
+            Debug.Log("WINNER - " + winner_id);
+            winScene = true;
+        }
     }
 
     public void ChangePlayerScore(int value, int id)

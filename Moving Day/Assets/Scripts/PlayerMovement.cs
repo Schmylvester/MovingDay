@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
         speedUpRate = default_accel;
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
+
+        GameObject.Find("Main Camera").GetComponent<CameraScript>().addPoint(this.gameObject);
     }
 	
 	void Update ()
