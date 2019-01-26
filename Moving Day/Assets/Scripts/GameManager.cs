@@ -11,9 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player_prefab;
 
     [Header("Managers")]
-    [SerializeField] private bool has_started = false;
     [SerializeField] private EventsManager event_manager;
+    [SerializeField] private CameraScript camera_script;
 
+    [SerializeField] private bool has_started = false;
     [SerializeField] private GameObject[] players;
 
     private int clock_mins = 5;
@@ -34,7 +35,8 @@ public class GameManager : MonoBehaviour
             players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
         }
 
-        SetGame(5, 1.0f, 4);
+        camera_script = FindObjectOfType<CameraScript>();
+        SetGame(5, 1.0f, 2);
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -152,7 +154,8 @@ public class GameManager : MonoBehaviour
     {
         for(uint i = 0; i < player_count; i++)
         {
-            Instantiate(player_prefab, spawn_points[i].position, spawn_points[i].rotation);
+            GameObject player = Instantiate(player_prefab, spawn_points[i].position, spawn_points[i].rotation);
+            camera_script.addPoint(player);
         }
 
         players = GameObject.FindGameObjectsWithTag("Player");
