@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public bool has_ended { get; set; }
 
+    [Header("Spawn")]
+    [SerializeField] private Transform[] spawn_points;
+    [SerializeField] private GameObject player_prefab;
+
+    [Header("Managers")]
     [SerializeField] private bool has_started = false;
     [SerializeField] private EventsManager event_manager;
 
@@ -88,6 +93,7 @@ public class GameManager : MonoBehaviour
         SetPlayerCount(player_count);
         clock_mins = mins;
         clock_secs = secs;
+        countdown_secs = 3.0f;
     }
 
     void StartGame()
@@ -139,6 +145,25 @@ public class GameManager : MonoBehaviour
         {
             scores.Add(0);
         }
+        InitialisePlayers(player_count);
+    }
+
+    void InitialisePlayers(int player_count)
+    {
+        for(uint i = 0; i < player_count; i++)
+        {
+            Instantiate(player_prefab, spawn_points[i].position, spawn_points[i].rotation);
+        }
+
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        for(uint i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().SetID((int)i);
+            players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
+        }
+
+        has_started = false;
     }
 
     public int GetPlayerCount()

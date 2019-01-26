@@ -22,8 +22,6 @@ GameObject:
   - component: {fileID: 114863083681637536}
   - component: {fileID: 114708580909042646}
   - component: {fileID: 114810886388156830}
-  - component: {fileID: 114340123114044826}
-  - component: {fileID: 114530295226560686}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -44,32 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114340123114044826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873988793825984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4185ead7ab6e7478ba23df419be581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max_players: 2
---- !u!114 &114530295226560686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873988793825984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2065e63abbfac18458c57f27161859df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  shake_duration: 3
-  shake_amount: 0.7
 --- !u!114 &114708580909042646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,6 +81,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f00df4158549546930a9663a80d3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn_points:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  player_prefab: {fileID: 1222668611814234, guid: 228f8faf5727b944abe3083be84fafb2,
+    type: 2}
   has_started: 0
   event_manager: {fileID: 0}
-  players: []
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

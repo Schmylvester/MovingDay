@@ -19,6 +19,18 @@ public class GameHUD : MonoBehaviour
 	void Awake ()
     {
         game_manager = FindObjectOfType<GameManager>();
+        GameObject HUDS = GameObject.Find("HUD");
+        foreach(Transform child in HUDS.GetComponentInChildren<Transform>())
+        {
+            if(child.name == "HUD")
+            {
+                HUD = child.gameObject;
+            }
+            else if(child.name == "Countdown HUD")
+            {
+                CountdownHUD = child.gameObject;
+            }
+        }
         GUIElements();
 	}
 
