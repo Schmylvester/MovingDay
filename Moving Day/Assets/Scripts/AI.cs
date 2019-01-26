@@ -68,7 +68,7 @@ public class AI : MonoBehaviour
         {
             //here goes code for opening van
             GetComponent<Animator>().SetBool("IsOpen", true);
-
+            GetComponentInChildren<FloodSpawner>().StartSpawning();
             m_timer += Time.deltaTime;
             if (m_timer >= m_waitTime)
             {
@@ -76,6 +76,7 @@ public class AI : MonoBehaviour
                 m_waiting = false;
                 m_speed = Random.Range(m_minSpeed, m_maxSpeed);
                 GetComponent<Animator>().SetBool("IsOpen", false);
+                GetComponent<FloodSpawner>().StopSpawning();
             }
         }
 

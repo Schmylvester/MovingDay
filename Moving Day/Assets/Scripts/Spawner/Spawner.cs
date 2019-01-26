@@ -110,12 +110,39 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    public void SpawnRandom(Vector3 _force)
+    {
+        int index = Random.Range(0, m_spawned.Length);
+
+        //spawn based on type
+        switch (m_type)
+        {
+            case TYPE.CIRCLE:
+                SpawnCircleArea(index, _force);
+                break;
+            case TYPE.SPHERE:
+                SpawnSphereArea(index, _force);
+                break;
+            case TYPE.CUBE:
+                SpawnCubeArea(index, _force);
+                break;
+        }
+    }
+
     //spawn from random positions in a cube area
     void SpawnCubeArea(int _index)
     {
-        Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_cubeWidth / 2, transform.position.y + m_cubeWidth / 2),
+        GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_cubeWidth / 2, transform.position.y + m_cubeWidth / 2),
             Random.Range(transform.position.y - m_cubeHeight / 2, transform.position.y + m_cubeWidth / 2),
             Random.Range(transform.position.z - m_cubeDepth / 2, transform.position.z + m_cubeDepth / 2)), transform.rotation);
+    }
+
+    void SpawnCubeArea(int _index, Vector3 _force)
+    {
+        GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_cubeWidth / 2, transform.position.y + m_cubeWidth / 2),
+            Random.Range(transform.position.y - m_cubeHeight / 2, transform.position.y + m_cubeWidth / 2),
+            Random.Range(transform.position.z - m_cubeDepth / 2, transform.position.z + m_cubeDepth / 2)), transform.rotation);
+        obj.GetComponent<Rigidbody>().AddForce(_force);
     }
 
     //spawn from random 3d position in sphere
@@ -126,11 +153,28 @@ public class Spawner : MonoBehaviour
             Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
     }
 
+    //spawn from random 3d position in sphere
+    void SpawnSphereArea(int _index, Vector3 _force)
+    {
+       GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_radius, transform.position.y + m_radius),
+            Random.Range(transform.position.y - m_radius, transform.position.y + m_radius),
+            Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
+        obj.GetComponent<Rigidbody>().AddForce(_force);
+    }
+
     //spawn from random position in a circle
     public void SpawnCircleArea(int _index)
     {
         Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_radius, transform.position.y + m_radius),
             transform.position.y,
             Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
+    }
+
+    public void SpawnCircleArea(int _index, Vector3 _force)
+    {
+        GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_radius, transform.position.y + m_radius),
+            transform.position.y,
+            Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
+        obj.GetComponent<Rigidbody>().AddForce(_force);
     }
 }
