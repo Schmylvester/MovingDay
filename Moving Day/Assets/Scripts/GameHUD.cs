@@ -10,18 +10,21 @@ public class GameHUD : MonoBehaviour
 
     [SerializeField] private Text timer, countdown_text, events_text;
 
+    private bool show_event_text = false;
     private bool set_gui = false;
 
     private GameManager game_manager;
 
-	// Use this for initialization
-	void Awake ()
+    private float event_timer = 0;
+
+    // Use this for initialization
+    void Awake ()
     {
         game_manager = FindObjectOfType<GameManager>();
         GameObject HUDS = GameObject.Find("HUD");
         foreach(Transform child in HUDS.GetComponentInChildren<Transform>())
         {
-            if(child.name == "HUD")
+            if(child.name == "Game HUD")
             {
                 HUD = child.gameObject;
             }
@@ -51,6 +54,18 @@ public class GameHUD : MonoBehaviour
             CountdownHUD.SetActive(false);
             HUD.SetActive(true);
         }
+
+        if(show_event_text)
+        {
+            event_timer += Time.deltaTime;
+        }
+
+        if(event_timer > 3.5)
+        {
+            events_text.text = "";
+            show_event_text = false;
+            event_timer = 0;
+        }
     }
 
     private void OnGUI()
@@ -64,7 +79,6 @@ public class GameHUD : MonoBehaviour
         {
             countdown_text.text = "GO!";
         }
-        events_text.text = "";
     }
 
     void GUIElements()
@@ -93,28 +107,12 @@ public class GameHUD : MonoBehaviour
             {
                 events_text = child.GetComponent<Text>();
             }
-
-            //Set Player Score Text
-            for (uint i = 0; i < game_manager.GetPlayerCount(); i++)
-            {
-                string title = "Player " + (i + 1).ToString() + " Score";
-            }
-            if (game_manager.GetPlayerCount() < 4)
-            {
-                for (uint i = (uint)game_manager.GetPlayerCount(); i < 4; i++)
-                {
-                    string title = "Player " + (i + 1).ToString() + " Score";
-                    if (child.gameObject.name == title)
-                    {
-                        child.GetComponent<Text>().text = "";
-                    }
-                }
-            }
         }
     }
 
     public void SetEventText(string new_text)
     {
         events_text.text = new_text;
+        show_event_text = true;
     }
 }

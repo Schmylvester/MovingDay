@@ -29,16 +29,10 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-
-        for(uint i = 0; i < players.Length; i++)
-        {
-            players[i].GetComponent<PlayerMovement>().SetID((int)i);
-            players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
-        }
-
+        SetPlayerColours();
+        scoreBar = FindObjectOfType<ScoreBar>();
         camera_script = FindObjectOfType<CameraScript>();
-        SetGame(5, 1.0f, 2);
+        SetGame(5, 1.0f, 1);
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -51,6 +45,7 @@ public class GameManager : MonoBehaviour
 		if(has_started && !has_ended)
         {
             GameClock();
+            scoreBar.scoreUpdated();
             event_manager.EventChecker(Time.deltaTime);
         }
         else if(has_ended)
@@ -160,14 +155,9 @@ public class GameManager : MonoBehaviour
             GameObject player = Instantiate(player_prefab, spawn_points[i].position, spawn_points[i].rotation);
             camera_script.addPoint(player);
         }
+        SetPlayerColours();
 
-        players = GameObject.FindGameObjectsWithTag("Player");
-
-        for(uint i = 0; i < players.Length; i++)
-        {
-            players[i].GetComponent<PlayerMovement>().SetID((int)i);
-            players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
-        }
+        scoreBar.ChangePlayerCount();
 
         has_started = false;
     }
@@ -203,6 +193,17 @@ public class GameManager : MonoBehaviour
                 return orange;
             default:
                 return Color.blue;
+        }
+    }
+
+    void SetPlayerColours()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        for (uint i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().SetID((int)i);
+            players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
         }
     }
 }

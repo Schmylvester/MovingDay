@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EventsManager : MonoBehaviour
 {
+    private bool display_text = false;
+
     private GameHUD game_hud;
 
     private float clock_seconds = 0, event_time = 0;
@@ -55,7 +57,6 @@ public class EventsManager : MonoBehaviour
         if(camera_shake)
         camera_shake.SetShake(5, 0.7f);
         game_hud.SetEventText("EARTHQUAKE!");
-        Debug.Log("EARTHQUAKE!");
     }
 
     void Train()
