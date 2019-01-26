@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBuffs : MonoBehaviour
 {
-    [SerializeField] GameObject[] particle_systems;
+    [SerializeField] PowerUpEffect power_up;
     float[] power_timers;
 
     private void Awake()
@@ -14,11 +14,9 @@ public class PlayerBuffs : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < particle_systems.Length; i++)
+        for (int i = 0; i < power_timers.Length; i++)
             if (power_timers[i] > 0)
                 power_timers[i] -= Time.deltaTime;
-            else if(particle_systems[i].activeSelf == true)
-                particle_systems[i].SetActive(false);
     }
 
     public bool powerActive(Power_Ups power)
@@ -29,6 +27,7 @@ public class PlayerBuffs : MonoBehaviour
     public void addPower(Power_Ups power, float time = 10)
     {
         power_timers[(int)power] = time;
-        particle_systems[(int)power].SetActive(true);
+        power_up.gameObject.SetActive(true);
+        power_up.enablePower(power);
     }
 }
