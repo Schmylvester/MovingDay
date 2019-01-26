@@ -37,7 +37,12 @@ public class GameManager : MonoBehaviour
         SetPlayerColours();
         scoreBar = FindObjectOfType<ScoreBar>();
         camera_script = FindObjectOfType<CameraScript>();
-        GameSettings settings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
+        GameObject settings_object = GameObject.Find("GameSettings");
+        GameSettings settings = null;
+        if (settings_object)
+        {
+            settings = settings_object.GetComponent<GameSettings>();
+        }
         if (settings)
         {
             SetGame(settings.m_minutes, settings.m_seconds, settings.m_players);
