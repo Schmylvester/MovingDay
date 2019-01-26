@@ -11,16 +11,19 @@ public class PlayerInteract : MonoBehaviour
     private float dropOverLapDelay;
     bool grabbed;
 
+
+    [SerializeField] private Animator playerAnimator;
+
     // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //delay so drop input isnt dected instantly (could be couroutine wait???)
+    void Start ()
+	{
+		
+	}
+	
+	// Update is called once per frame
+	void Update ()
+	{
+	    //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
         {
             InputManager iM = FindObjectOfType<InputManager>();
@@ -53,7 +56,7 @@ public class PlayerInteract : MonoBehaviour
             grabbed = false;
             dropOverLapDelay = 0;
 
-            movement.resetSpeed();
+            playerAnimator.SetBool("IsHolding", false);
         }
     }
 
@@ -72,17 +75,7 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.GetComponent<Rigidbody>().useGravity = false;
                 grabbed = true;
 
-                ObjectData data = grabbedObj.GetComponent<ObjectData>();
-                data.pickedUp();
-                switch (data.getWeight())
-                {
-                    case WeightClass.Heavy:
-                        movement.ChangeSpeed(2, 0.1f);
-                        break;
-                    case WeightClass.Medium:
-                        movement.ChangeSpeed(3);
-                        break;
-                }
+                playerAnimator.SetBool("IsHolding", true);
             }
         }
     }
@@ -94,5 +87,16 @@ public class PlayerInteract : MonoBehaviour
         {
             GrabObject(_col.gameObject);
         }
+    }
+
+
+    public GameObject GetHeldObject()
+    {
+        if (grabbedObj != null)
+        {
+            return grabbedObj;
+        }
+
+        return null;
     }
 }
