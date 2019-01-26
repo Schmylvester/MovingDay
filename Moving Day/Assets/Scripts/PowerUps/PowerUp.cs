@@ -13,7 +13,7 @@ public class PowerUp : MonoBehaviour {
         m_sprite.sprite = _sprite;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.tag == "Player")
         {

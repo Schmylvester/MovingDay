@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4927622551800674}
   - component: {fileID: 212123665775742226}
-  - component: {fileID: 58049585387063732}
   - component: {fileID: 114422373582079802}
+  - component: {fileID: 135893868914603148}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: Untagged
@@ -42,21 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
---- !u!58 &58049585387063732
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494072754323522}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!114 &114422373582079802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,6 +54,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sprite: {fileID: 212123665775742226}
+--- !u!135 &135893868914603148
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1494072754323522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212123665775742226
 SpriteRenderer:
   m_ObjectHideFlags: 1
