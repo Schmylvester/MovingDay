@@ -28,13 +28,13 @@ public class EventsManager : MonoBehaviour
         {
             Events();
         }
-        Debug.Log("Event time: " + event_time);
+        //Debug.Log("Event time: " + event_time);
     }
 
     void Events()
     {
         int num = (int)Random.Range(0, 2);
-        Debug.Log(num);
+        //Debug.Log(num);
 
         switch(num)
         {

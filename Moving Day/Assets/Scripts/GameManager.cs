@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public bool has_ended { get; set; }
+
+    bool winScene = false;
 
     [Header("Spawn")]
     [SerializeField] private Transform[] spawn_points;
@@ -34,7 +37,15 @@ public class GameManager : MonoBehaviour
         SetPlayerColours();
         scoreBar = FindObjectOfType<ScoreBar>();
         camera_script = FindObjectOfType<CameraScript>();
-        SetGame(5, 1.0f, 1);
+        GameSettings settings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
+        if (settings)
+        {
+            SetGame(settings.m_minutes, settings.m_seconds, settings.m_players);
+        }
+        else
+        {
+            SetGame();
+        }
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -52,7 +63,11 @@ public class GameManager : MonoBehaviour
         }
         else if(has_ended)
         {
+            if (!winScene)
+            {
             EndGame();
+            winScene = true;
+            }
         }
 	}
 
@@ -89,7 +104,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGame(int mins = 5, float secs = 1.0f, int player_count = 1)
+    public void SetGame(int mins = 1, float secs = 1.0f, int player_count = 1)
     {
         ResetPlayerCount(player_count);
         clock_mins = mins;
@@ -138,7 +153,9 @@ public class GameManager : MonoBehaviour
             {
                 winner = player;
             }
+            winScene = true;
         }
+        SceneManager.LoadScene("WinScene");
         Debug.Log("Player " + (winner + 1).ToString() + " wins!");        
     }
 
