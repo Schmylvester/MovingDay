@@ -182,7 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minutes: 0
   m_seconds: 10
-  m_players: 4
+  m_players: 2
 --- !u!4 &1180136749
 Transform:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour {
 	void Update () {
         if (iM.isButtonPressed(XboxButton.Start, 0))
         {
-            SceneManager.LoadScene("TruckSpawn");
+            SceneManager.LoadScene("HouseScorer");
         }
 	}
 }
