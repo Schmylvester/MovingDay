@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 114906872803386540}
   - component: {fileID: 114777460211032420}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -681,12 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d08c009fc4c5e44da7e3fcc5d69e2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle_systems:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  particle_systems: []
 --- !u!114 &114906872803386540
 MonoBehaviour:
   m_ObjectHideFlags: 1
