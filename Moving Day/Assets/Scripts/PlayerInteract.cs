@@ -86,4 +86,15 @@ public class PlayerInteract : MonoBehaviour
             GrabObject(_col.gameObject);
         }
     }
+
+
+    public GameObject GetHeldObject()
+    {
+        if (grabbedObj != null)
+        {
+            return grabbedObj;
+        }
+
+        return null;
+    }
 }

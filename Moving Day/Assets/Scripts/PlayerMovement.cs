@@ -5,19 +5,24 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private int playerID;
+
     [SerializeField] float moveSpeed;
     [SerializeField] float speedUpRate;
     [SerializeField] float rotationSpeed;
-
-    private float currentSpeed;
-
-    private float startMoveSpeed;
-    private float startSpeedUpRate;
-
     [SerializeField] private Animator playerAnimator;
 
     private Vector3 lastDirection;
+    private float currentSpeed;
+    private float startMoveSpeed;
+    private float startSpeedUpRate;
 
+    [SerializeField] float jumpMax;
+    private bool grounded;
+    [SerializeField] private Transform groundPoint;
+    private bool jumping;
+    private float jumpTarget;
+
+    private float jumpSpeed = 0;
 
     void Start ()
     {
@@ -61,10 +66,42 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
 
+
+        //
         //jumping stuff
-        if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
+        grounded = Physics.Raycast(groundPoint.transform.position, -Vector3.up, 0.1f);
+        if (grounded && !jumping)
         {
+            if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
+            {
+                jumping = true;
+                grounded = false;
+
+                jumpTarget = transform.position.y + 0.5f;
+
+                jumpSpeed = 2.5f;
+
+            }
         }
+        else
+        {
+            if (jumping)
+            {
+                jumpSpeed -= 0.1f;
+                transform.Translate(transform.up * Time.deltaTime * jumpSpeed, Space.World);
+
+                if (transform.position.y >= jumpTarget)
+                {
+                    jumpSpeed += 0.1f;
+                    jumping = false;
+                }
+            }
+            else
+            {
+                jumpSpeed += 0.1f;
+                transform.Translate(-transform.up * Time.deltaTime * jumpSpeed, Space.World);
+            }
+        }        
     }
 
 
@@ -113,5 +150,22 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetPlayerForceDirection()
     {
         return (lastDirection.normalized * currentSpeed) * 2;
+    }
+
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject)
+        {
+            currentSpeed = 0;
+        }
+    }
+
+    void OnCollisionStay(Collision col)
+    {
+        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject)
+        {
+            currentSpeed = 0;
+        }
     }
 }
