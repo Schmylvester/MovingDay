@@ -14,7 +14,7 @@ public class PlayerBuffs : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < (int)Power_Ups.COUNT; i++)
+        for (int i = 0; i < particle_systems.Length; i++)
             if (power_timers[i] > 0)
                 power_timers[i] -= Time.deltaTime;
             else if(particle_systems[i].activeSelf == true)

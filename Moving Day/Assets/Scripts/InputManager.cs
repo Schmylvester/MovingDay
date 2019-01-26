@@ -153,10 +153,7 @@ public class InputManager : MonoBehaviour
     }
     public float getAxis(Axis axis, int player_id)
     {
-
-
-
-#define###
+        return controllers[player_id].axes_this_frame[(int)axis];
     }
 
     /// <summary>
