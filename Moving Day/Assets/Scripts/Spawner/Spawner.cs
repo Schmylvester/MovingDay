@@ -5,9 +5,12 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
-    enum TYPE { CIRCLE,
+    enum TYPE
+    {
+        CIRCLE,
         CUBE,
-        SPHERE };
+        SPHERE
+    };
 
     public GameObject[] m_spawned; //this is the list objects that we wish to spawn from this spawner
     [SerializeField] TYPE m_type;
@@ -15,19 +18,22 @@ public class Spawner : MonoBehaviour
     [SerializeField] float m_cubeWidth = 1;
     [SerializeField] float m_cubeHeight = 1;
     [SerializeField] float m_cubeDepth = 1;
+    [SerializeField] Material[] player_mats;
 
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         //if (Input.GetKey(KeyCode.Space))
         //{
         //    Spawn();
         //}
-	}
+    }
 
 #if(UNITY_EDITOR)
     void OnDrawGizmos()
@@ -96,7 +102,7 @@ public class Spawner : MonoBehaviour
         int index = Random.Range(0, m_spawned.Length);
 
         //spawn based on type
-        switch(m_type)
+        switch (m_type)
         {
             case TYPE.CIRCLE:
                 SpawnCircleArea(index);
@@ -143,6 +149,8 @@ public class Spawner : MonoBehaviour
             Random.Range(transform.position.y - m_cubeHeight / 2, transform.position.y + m_cubeWidth / 2),
             Random.Range(transform.position.z - m_cubeDepth / 2, transform.position.z + m_cubeDepth / 2)), transform.rotation);
         obj.GetComponent<Rigidbody>().AddForce(_force);
+        int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
+        obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
     }
 
     //spawn from random 3d position in sphere
@@ -156,10 +164,13 @@ public class Spawner : MonoBehaviour
     //spawn from random 3d position in sphere
     void SpawnSphereArea(int _index, Vector3 _force)
     {
-       GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_radius, transform.position.y + m_radius),
-            Random.Range(transform.position.y - m_radius, transform.position.y + m_radius),
-            Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
+        GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_radius, transform.position.y + m_radius),
+             Random.Range(transform.position.y - m_radius, transform.position.y + m_radius),
+             Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
         obj.GetComponent<Rigidbody>().AddForce(_force);
+
+        int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
+        obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
     }
 
     //spawn from random position in a circle
@@ -176,5 +187,8 @@ public class Spawner : MonoBehaviour
             transform.position.y,
             Random.Range(transform.position.z - m_radius, transform.position.z + m_radius)), transform.rotation);
         obj.GetComponent<Rigidbody>().AddForce(_force);
+
+        int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
+        obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
     }
 }

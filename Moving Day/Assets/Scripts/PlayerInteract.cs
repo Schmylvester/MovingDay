@@ -6,36 +6,37 @@ public class PlayerInteract : MonoBehaviour
 {
     public GameObject grabbedObj;
     [SerializeField] private Transform grabObjectPos;
+    [SerializeField] PlayerMovement movement;
 
     private float dropOverLapDelay;
     bool grabbed;
 
-	// Use this for initialization
-	void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    //delay so drop input isnt dected instantly (could be couroutine wait???)
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
-	    {
-	        InputManager iM = FindObjectOfType<InputManager>();
-	        if (iM.buttonUp(XboxButton.B, GetComponent<PlayerMovement>().GetPlayerID()))
-	        {
-	            DropObject();
-	        }
-	    }
-	    else
-	    {
-	        if (grabbed)
-	        {
-	            dropOverLapDelay += Time.deltaTime;
+        {
+            InputManager iM = FindObjectOfType<InputManager>();
+            if (iM.buttonUp(XboxButton.B, GetComponent<PlayerMovement>().GetPlayerID()))
+            {
+                DropObject();
             }
-	    }
-	}
+        }
+        else
+        {
+            if (grabbed)
+            {
+                dropOverLapDelay += Time.deltaTime;
+            }
+        }
+    }
 
 
     void DropObject()
@@ -45,11 +46,14 @@ public class PlayerInteract : MonoBehaviour
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
             grabbedObj.GetComponent<Rigidbody>().useGravity = true;
+            grabbedObj.GetComponent<ObjectData>().putDown();
 
 
             grabbedObj = null;
             grabbed = false;
             dropOverLapDelay = 0;
+
+            movement.resetSpeed();
         }
     }
 
@@ -67,6 +71,18 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
                 grabbedObj.GetComponent<Rigidbody>().useGravity = false;
                 grabbed = true;
+
+                ObjectData data = grabbedObj.GetComponent<ObjectData>();
+                data.pickedUp();
+                switch (data.getWeight())
+                {
+                    case WeightClass.Heavy:
+                        movement.ChangeSpeed(2, 0.1f);
+                        break;
+                    case WeightClass.Medium:
+                        movement.ChangeSpeed(3);
+                        break;
+                }
             }
         }
     }

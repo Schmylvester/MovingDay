@@ -860,7 +860,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222668611814234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 2.2117639, y: -4.7145324e-17, z: 2.1232367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4278329322512862}
@@ -1867,8 +1867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  moveSpeed: 4
-  speedUpRate: 0.15
+  default_max: 4
+  default_accel: 0.15
   rotationSpeed: 10
   playerAnimator: {fileID: 95143222355130848}
 --- !u!114 &114917218955317140
@@ -1902,6 +1902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbedObj: {fileID: 0}
   grabObjectPos: {fileID: 4560941224982396}
+  movement: {fileID: 114906872803386540}
 --- !u!135 &135931904977250806
 SphereCollider:
   m_ObjectHideFlags: 1
