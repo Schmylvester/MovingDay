@@ -42,7 +42,6 @@ public class CameraScript : MonoBehaviour {
         }
 
         camera_shake.SetBasePoint(midpoint);
-        Debug.Log(midpoint);
 
 		//find the the two players that are furthest apart
 		//get their distance and use that to calculate how far to zoom out
@@ -73,7 +72,10 @@ public class CameraScript : MonoBehaviour {
 		zoom.z -= furthestDistance / m_zoomFactor;
 		this.transform.localPosition = zoom;
 
-        GetComponent<Camera>().transform.LookAt(midpoint);
+        if (!camera_shake.isEarthquake())
+        {
+            GetComponent<Camera>().transform.LookAt(midpoint);
+        }
 
 	}
 
