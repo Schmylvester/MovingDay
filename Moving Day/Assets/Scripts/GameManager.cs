@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         }
         else if(has_ended)
         {
-            if (!winscene)
+            if (!winScene)
             {
             EndGame();
             winScene = true;
@@ -153,10 +153,9 @@ public class GameManager : MonoBehaviour
             {
                 winner = player;
             }
-            SceneManager.LoadScene("WinScene");
-            Debug.Log("WINNER - " + winner_id);
             winScene = true;
         }
+        SceneManager.LoadScene("WinScene");
         Debug.Log("Player " + (winner + 1).ToString() + " wins!");        
     }
 

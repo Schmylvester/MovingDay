@@ -20,7 +20,10 @@ public class ScoreBar : MonoBehaviour
     {
         for (ushort i = 0; i < playerCount; i++)
         {
-            bars[i].localScale += new Vector3(Time.deltaTime * (target_scale[i] - bars[i].localScale.x), 0, 0);
+            if (bars[i])
+            {
+                bars[i].localScale += new Vector3(Time.deltaTime * (target_scale[i] - bars[i].localScale.x), 0, 0);
+            }
         }
     }
 
