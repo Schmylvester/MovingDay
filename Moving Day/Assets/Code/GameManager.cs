@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
     public bool has_ended { get; set; }
 
     [SerializeField] private bool has_started = false;
+    [SerializeField] private EventsManager event_manager;
 
-    [SerializeField] private int clock_mins = 5;
-    private float clock_secs = 0.0f;
+    private int clock_mins = 5;
+    private float clock_secs = 1.0f;
 
     private float countdown_secs = 3.0f;
 
@@ -18,8 +19,10 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
     {
-        has_ended = false;
         SetGame();
+        event_manager = GetComponent<EventsManager>();
+        DontDestroyOnLoad(this.gameObject);
+        has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
 	}
 	
 	// Update is called once per frame
@@ -29,20 +32,26 @@ public class GameManager : MonoBehaviour
 		if(has_started && !has_ended)
         {
             GameClock();
-            GetPlayerScore(0);
+            event_manager.EventChecker(Time.deltaTime);
         }
         else if(has_ended)
         {
             EndGame();
         }
-
-        Debug.Log(GetTimer());
 	}
 
     public string GetTimer()
     {
         float secs = (float)Mathf.Floor(clock_secs);
-        return clock_mins.ToString() + ":" + secs.ToString("00");
+
+        string timer = countdown_secs.ToString("0");
+
+        if(has_started)
+        {
+            timer = clock_mins.ToString() + ":" + secs.ToString("00");
+        }
+
+        return timer;
     }
 
    void GameClock()
@@ -64,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGame(int mins = 5, float secs = 0.0f, int player_count = 1)
+    public void SetGame(int mins = 5, float secs = 1.0f, int player_count = 1)
     {
         SetPlayerCount(player_count);
         clock_mins = mins;
@@ -90,7 +99,7 @@ public class GameManager : MonoBehaviour
         float high_score = float.MinValue;
         int winner_id = -1;
 
-        for(uint i = 0; i < scores.Capacity; i++)
+        for(uint i = 0; i < scores.Count; i++)
         {
             if(scores[(int)i] >= high_score)
             {
@@ -102,13 +111,40 @@ public class GameManager : MonoBehaviour
         Debug.Log("WINNER - " + winner_id);
     }
 
+    public void ChangePlayerScore(int value, int id)
+    {
+        scores[id] += value;
+    }
+
     public int GetPlayerScore(int id)
     {
         return scores[id];
     }
 
+    //Resets Score List for New Game
     public void SetPlayerCount(int player_count = 1)
     {
-        scores.Capacity = player_count;
+        scores.Clear();
+        for(uint i = 0; i < player_count; i++)
+        {
+            scores.Add(0);
+        }
+    }
+
+    public int GetPlayerCount()
+    {
+        return scores.Count;
+    }
+
+    public string TimerMode()
+    {
+        if(countdown_secs > 0)
+        {
+            return "Countdown";
+        }
+        else
+        {
+            return "Timer";
+        }
     }
 }

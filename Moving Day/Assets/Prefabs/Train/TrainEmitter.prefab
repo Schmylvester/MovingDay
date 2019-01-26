@@ -9,59 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1873988793825984}
+  m_RootGameObject: {fileID: 1286661783389484}
   m_IsPrefabAsset: 1
---- !u!1 &1873988793825984
+--- !u!1 &1286661783389484
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4939570936160962}
-  - component: {fileID: 114863083681637536}
-  - component: {fileID: 114708580909042646}
+  - component: {fileID: 4717922099095992}
+  - component: {fileID: 114276292976493784}
   m_Layer: 0
-  m_Name: GameManager
-  m_TagString: GameManager
+  m_Name: TrainEmitter
+  m_TagString: TrainEmitter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4939570936160962
+--- !u!4 &4717922099095992
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873988793825984}
+  m_GameObject: {fileID: 1286661783389484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114708580909042646
+--- !u!114 &114276292976493784
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873988793825984}
+  m_GameObject: {fileID: 1286661783389484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486abdf418b07394d8ddc1a136393b91, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c500482f7265b9499aa8123e9a18ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114863083681637536
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873988793825984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c2653e5c696b94593e8dc8913484ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  has_started: 0
-  event_manager: {fileID: 0}
+  train: {fileID: 1064544085437506, guid: 6e720c3de3f80a44a87c413c0aa6cb34, type: 2}
+  spawn: 1
