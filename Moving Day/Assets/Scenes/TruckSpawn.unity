@@ -850,11 +850,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points:
-  - {fileID: 838018908}
-  - {fileID: 1260964752}
-  - {fileID: 919854097}
   - {fileID: 1919703507}
   offset: {x: 0, y: 0, z: 0}
+  m_zoomFactor: 1
+  max_zoomDistance: 4
+  min_zoomDistance: 15
 --- !u!1 &1260964752
 GameObject:
   m_ObjectHideFlags: 0
