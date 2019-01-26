@@ -56,8 +56,10 @@ public class EventsManager : MonoBehaviour
     {
         TrainEmitter[] train_em = FindObjectsOfType<TrainEmitter>();
 
-        int rand_num = (int)Random.Range(0, train_em.Length);
-
-        train_em[rand_num].SpawnTrain();
+        if (train_em.Length > 0)
+        {
+            int rand_num = (int)Random.Range(0, train_em.Length);
+            train_em[rand_num].SpawnTrain();
+        }
     }
 }

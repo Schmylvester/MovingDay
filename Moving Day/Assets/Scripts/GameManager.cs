@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool has_started = false;
     [SerializeField] private EventsManager event_manager;
 
+    [SerializeField] private GameObject[] players;
+
     private int clock_mins = 5;
     private float clock_secs = 1.0f;
 
@@ -19,7 +21,15 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
     {
-        SetGame();
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        for(uint i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().SetID((int)i);
+            players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
+        }
+
+        SetGame(5, 1.0f, players.Length);
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -145,6 +155,23 @@ public class GameManager : MonoBehaviour
         else
         {
             return "Timer";
+        }
+    }
+
+    Color PlayerColour(int id)
+    {
+        switch(id)
+        {
+            case 1:
+                return Color.red;
+            case 2:
+                Color purple = new Vector4(0.5849f, 0, 0.5802f, 1);
+                return purple;
+            case 3:
+                Color orange = new Vector4(1, 0.6171f, 0, 1);
+                return orange;
+            default:
+                return Color.blue;
         }
     }
 }
