@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float startMoveSpeed;
     private float startSpeedUpRate;
 
+    [SerializeField] private Animator playerAnimator;
+
 
     void Start ()
     {
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	    {
             //set rotation to look at move direction
 	        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotationSpeed);
+            playerAnimator.SetBool("Walking", true);
 
             if (currentSpeed < moveSpeed)
 	        {
@@ -44,10 +47,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            playerAnimator.SetBool("Walking", false);
             currentSpeed = 0;
         }
 
-        transform.Translate(dir * Time.deltaTime * (currentSpeed / 10), Space.World);
+        transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
     }
 
     /// <summary>
