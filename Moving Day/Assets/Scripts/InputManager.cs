@@ -151,6 +151,14 @@ public class InputManager : MonoBehaviour
         state = getAxisState(this_frame, axis, player_id);
         return this_frame;
     }
+    public float getAxis(Axis axis, int player_id)
+    {
+
+
+
+#define###
+    }
+
     /// <summary>
     /// Gets the axis of a player's input
     /// </summary>
