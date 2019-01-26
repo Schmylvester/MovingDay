@@ -46,13 +46,13 @@ public class PlayerInteract : MonoBehaviour
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
             grabbedObj.GetComponent<Rigidbody>().useGravity = true;
+            grabbedObj.GetComponent<ObjectData>().putDown();
 
 
             grabbedObj = null;
             grabbed = false;
             dropOverLapDelay = 0;
 
-            grabbedObj.GetComponent<ObjectData>().putDown();
             movement.resetSpeed();
         }
     }

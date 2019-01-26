@@ -15,8 +15,8 @@ public class AI : MonoBehaviour
     [SerializeField] float m_minWaitTimeSeconds = 1.0f;
     [SerializeField] int m_maxPathSize = 100;
     GameObject m_minigame;
-    [SerializeField]Vector3 m_posTo;
-    [SerializeField]bool m_waiting;
+    [SerializeField] Vector3 m_posTo;
+    [SerializeField] bool m_waiting;
     [SerializeField] float m_waitTime;
     float m_timer = 0;
     bool can_move = true;
@@ -76,7 +76,7 @@ public class AI : MonoBehaviour
                 m_waiting = false;
                 m_speed = Random.Range(m_minSpeed, m_maxSpeed);
                 GetComponent<Animator>().SetBool("IsOpen", false);
-                GetComponent<FloodSpawner>().StopSpawning();
+                GetComponentInChildren<FloodSpawner>().StopSpawning();
             }
         }
 
@@ -97,15 +97,10 @@ public class AI : MonoBehaviour
             //pick randomly from each available linked node
             int count = m_nodeList[m_nodeList.Count - 1].GetComponent<Node>().m_linkedNodes.Count;
             int newIndex = Random.Range(0, count);
-            if (m_nodeList.Count > 1)
+            if (m_nodeList.Count > 0 && newIndex < m_nodeList[m_nodeList.Count - 1].GetComponent<Node>().m_linkedNodes.Count)
             {
-                if (m_nodeList[m_nodeList.Count - 1].GetComponent<Node>().m_linkedNodes[newIndex] == m_nodeList[m_nodeList.Count - 2])
-                {
-                    //re roll if the next node matches the previous node
-                    newIndex = Random.Range(0, count);
-                }
+                m_nodeList.Add(m_nodeList[m_nodeList.Count - 1].GetComponent<Node>().m_linkedNodes[newIndex]);
             }
-            m_nodeList.Add(m_nodeList[m_nodeList.Count - 1].GetComponent<Node>().m_linkedNodes[newIndex]);
 
             i++;
 
