@@ -16,6 +16,8 @@ public class PlayerCollision : MonoBehaviour
 
     private Quaternion lerpRotation;
 
+    private float knockForceMultiplier;
+
 
     // Use this for initialization
     void Start()
@@ -33,8 +35,10 @@ public class PlayerCollision : MonoBehaviour
             if (knockTimer < 1)
             {
                 knockTimer += Time.deltaTime;
-                transform.Translate(knockForceDir * Time.deltaTime, Space.World);
-               // transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, lerpRotation, Time.deltaTime * 3);
+                knockForceMultiplier -= knockTimer / 10;
+
+                transform.Translate(knockForceDir * Time.deltaTime / 3 * knockForceMultiplier, Space.World);
+
                 transform.rotation = Quaternion.Lerp(transform.rotation, lerpRotation, Time.deltaTime * 7.5f);
             }
             else
@@ -52,17 +56,35 @@ public class PlayerCollision : MonoBehaviour
     }
 
 
-    public void KnockYou(Vector3 dirForce)
+    public void KnockYou(Vector3 dirForce, WeightClass weight)
     {
         if (!isKnocked)
         {
             knockForceDir = dirForce;
             knockTimer = 0;
             isKnocked = true;
-            knockSlowDown = 0;
+            knockSlowDown = 1;
 
             playerAnimator.SetBool("KnockOver", true);
         }
+
+        knockForceMultiplier = 1;
+
+        switch (weight)
+        {
+            case WeightClass.Light:
+                knockForceMultiplier = 3f;
+                break;
+
+            case WeightClass.Medium:
+                knockForceMultiplier = 5f;
+                break;
+
+            case WeightClass.Heavy:
+                knockForceMultiplier = 7f;
+                break;
+        }
+
     }
 
 
@@ -73,7 +95,15 @@ public class PlayerCollision : MonoBehaviour
             Vector3 dir = col.transform.position - transform.position;
             dir = dir.normalized;
 
-            col.gameObject.GetComponent<PlayerCollision>().KnockYou(dir);
+            WeightClass kg = WeightClass.None;
+
+            if (GetComponent<PlayerInteract>().GetHeldObject() != null)
+            {
+                kg = GetComponent<PlayerInteract>().GetHeldObject().GetComponent<ObjectData>().getWeight();
+            }
+
+            col.gameObject.GetComponent<PlayerCollision>().KnockYou(dir, kg);
+
             lerpRotation = Quaternion.LookRotation(dir, Vector3.up);
 
             Debug.Log("knock yo");

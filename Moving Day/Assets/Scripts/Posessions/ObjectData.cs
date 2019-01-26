@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum WeightClass
 {
+    None,
     Light,
     Medium,
     Heavy,
