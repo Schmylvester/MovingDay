@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
+    private Vector3 lastDirection;
+
 
     void Start ()
     {
@@ -27,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 	{
 	    InputManager iM = FindObjectOfType<InputManager>();
         Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0, iM.getAxis(Axis.Left_Vertical, playerID));
+
+	    dir = dir.normalized;
+	    lastDirection = dir;
 
         //speed up player
         if (dir != Vector3.zero)
@@ -85,4 +90,18 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = moveSpeed;
     }
 
+    /// <summary>
+    /// returns player id
+    /// </summary>
+    /// <returns></returns>
+    public int GetPlayerID()
+    {
+        return playerID;
+    }
+
+
+    public Vector3 GetPlayerForceDirection()
+    {
+        return lastDirection.normalized * currentSpeed;
+    }
 }
