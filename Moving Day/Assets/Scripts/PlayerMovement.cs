@@ -154,6 +154,11 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = moveSpeed;
     }
 
+    public void SetID(int id)
+    {
+        playerID = id;
+    }
+
     /// <summary>
     /// returns player id
     /// </summary>

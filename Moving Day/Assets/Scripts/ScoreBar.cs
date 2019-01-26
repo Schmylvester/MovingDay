@@ -24,6 +24,11 @@ public class ScoreBar : MonoBehaviour
         }
     }
 
+    public void ChangePlayerCount()
+    {
+        playerCount = (ushort)gameManager.GetPlayerCount();
+    }
+
     public void scoreUpdated()
     {
         int scoreSum = 0;
