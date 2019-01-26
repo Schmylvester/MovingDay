@@ -1,82 +1,55 @@
 fileFormatVersion: 2
-guid: 8a3546b49f65a0d4b8e96b0776f14833
+guid: 5d9fce47ea1b39146a5eaf5b56a4fa47
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: hip
-    100002: joint1
-    100004: joint10
-    100006: joint11
-    100008: joint11 1
-    100010: joint12
-    100012: joint12 1
-    100014: joint13
-    100016: joint2
-    100018: joint3
-    100020: joint4
-    100022: joint5
-    100024: joint6
-    100026: joint7
-    100028: joint7 1
-    100030: joint8
-    100032: joint8 1
-    100034: joint9
-    100036: //RootNode
-    100038: pCube1
-    100040: pCube2
-    100042: polySurface1
-    100044: polySurface2
-    100046: polySurface3
-    100048: polySurface4
-    100050: polySurface6
-    100052: pSphere2
-    100054: spine
-    100056: spinectrl
-    100058: transform1
-    100060: transform2
-    100062: transform3
-    100064: transform4
-    100066: transform5
-    100068: transform6
-    400000: hip
-    400002: joint1
-    400004: joint10
-    400006: joint11
-    400008: joint11 1
-    400010: joint12
-    400012: joint12 1
-    400014: joint13
-    400016: joint2
-    400018: joint3
-    400020: joint4
-    400022: joint5
-    400024: joint6
-    400026: joint7
-    400028: joint7 1
-    400030: joint8
-    400032: joint8 1
-    400034: joint9
-    400036: //RootNode
-    400038: pCube1
-    400040: pCube2
-    400042: polySurface1
-    400044: polySurface2
-    400046: polySurface3
-    400048: polySurface4
-    400050: polySurface6
-    400052: pSphere2
-    400054: spine
-    400056: spinectrl
-    400058: transform1
-    400060: transform2
-    400062: transform3
-    400064: transform4
-    400066: transform5
-    400068: transform6
-    2100000: lambert5
-    4300000: pCube2
+    100000: Fadult_jump:hip
+    100002: Fadult_jump:joint1
+    100004: Fadult_jump:joint10
+    100006: Fadult_jump:joint11
+    100008: Fadult_jump:joint11 1
+    100010: Fadult_jump:joint12
+    100012: Fadult_jump:joint12 1
+    100014: Fadult_jump:joint13
+    100016: Fadult_jump:joint2
+    100018: Fadult_jump:joint3
+    100020: Fadult_jump:joint4
+    100022: Fadult_jump:joint5
+    100024: Fadult_jump:joint6
+    100026: Fadult_jump:joint7
+    100028: Fadult_jump:joint7 1
+    100030: Fadult_jump:joint8
+    100032: Fadult_jump:joint8 1
+    100034: Fadult_jump:joint9
+    100036: Fadult_jump:pSphere2
+    100038: Fadult_jump:spinectrl
+    100040: //RootNode
+    400000: Fadult_jump:hip
+    400002: Fadult_jump:joint1
+    400004: Fadult_jump:joint10
+    400006: Fadult_jump:joint11
+    400008: Fadult_jump:joint11 1
+    400010: Fadult_jump:joint12
+    400012: Fadult_jump:joint12 1
+    400014: Fadult_jump:joint13
+    400016: Fadult_jump:joint2
+    400018: Fadult_jump:joint3
+    400020: Fadult_jump:joint4
+    400022: Fadult_jump:joint5
+    400024: Fadult_jump:joint6
+    400026: Fadult_jump:joint7
+    400028: Fadult_jump:joint7 1
+    400030: Fadult_jump:joint8
+    400032: Fadult_jump:joint8 1
+    400034: Fadult_jump:joint9
+    400036: Fadult_jump:pSphere2
+    400038: Fadult_jump:spinectrl
+    400040: //RootNode
+    2100000: Fadult_jump_lambert4
+    4300000: Fadult_jump:pSphere2
+    7400000: Take 001
     9500000: //RootNode
-    13700000: pCube2
+    13700000: Fadult_jump:pSphere2
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -97,7 +70,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -108,7 +81,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 0.1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -127,8 +100,8 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
-    previousCalculatedGlobalScale: 10000
+    useFileScale: 0
+    previousCalculatedGlobalScale: 0.1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
@@ -136,7 +109,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 2
     human: []
@@ -153,8 +126,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 258d31fee768ade4e8ce236a42ac4bd0,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
