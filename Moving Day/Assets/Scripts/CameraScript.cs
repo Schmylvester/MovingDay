@@ -54,6 +54,8 @@ public class CameraScript : MonoBehaviour {
 		zoom.z -= furthestDistance / 2;
 		this.transform.localPosition = zoom;
 
+        GetComponent<Camera>().transform.LookAt(midpoint);
+
 	}
 
     public void addPoint(GameObject _newPoint)
