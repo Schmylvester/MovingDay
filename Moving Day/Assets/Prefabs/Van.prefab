@@ -687,7 +687,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127905468985372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.16}
+  m_LocalPosition: {x: 0, y: 0, z: -5.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4676245796341920}
@@ -920,12 +920,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawned:
-  - {fileID: 1827388350541316, guid: 6fb5697529ee44840814071e5f002299, type: 2}
+  - {fileID: 1205488633909942, guid: 041b194a2db4f0543bb70bd3ee8536c6, type: 2}
+  - {fileID: 1194578537545408, guid: 7cc9cd883ef598747bac78c1c9e42372, type: 2}
+  - {fileID: 1364869933958782, guid: 7c6c70416d31151459437d6c94870034, type: 2}
+  - {fileID: 1445152465226166, guid: be52ca874e7e3c14095cd76d2e9721e2, type: 2}
   m_type: 1
   m_radius: 1
   m_cubeWidth: 1
   m_cubeHeight: 1
   m_cubeDepth: 1
+  player_mats:
+  - {fileID: 2100000, guid: 4543fc5e933bcc94d92f90e3857ee94e, type: 2}
+  - {fileID: 2100000, guid: 1d94df9d7a228ac40a4880ec377c900d, type: 2}
+  - {fileID: 2100000, guid: 5c44290018875334a911faba7cea7902, type: 2}
+  - {fileID: 2100000, guid: ce6191ece58ea2549b71ee1c359c98a5, type: 2}
 --- !u!114 &114103708549573906
 MonoBehaviour:
   m_ObjectHideFlags: 1

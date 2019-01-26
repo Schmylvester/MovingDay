@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         speedUpRate = default_accel;
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
+
+        GameObject.Find("Main Camera").GetComponent<CameraScript>().addPoint(this.gameObject);
     }
 
 
@@ -152,6 +154,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentSpeed > moveSpeed)
             currentSpeed = moveSpeed;
+    }
+
+    public void SetID(int id)
+    {
+        playerID = id;
     }
 
     /// <summary>

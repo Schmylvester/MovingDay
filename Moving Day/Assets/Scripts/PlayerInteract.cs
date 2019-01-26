@@ -17,15 +17,15 @@ public class PlayerInteract : MonoBehaviour
     private Vector3 gobjLocalPos;
 
     // Use this for initialization
-    void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    //delay so drop input isnt dected instantly (could be couroutine wait???)
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
         {
             InputManager iM = FindObjectOfType<InputManager>();

@@ -49,7 +49,7 @@ public class GamePad
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] int max_players = 2;
+    [SerializeField] int max_players = 4;
     List<GamePad> controllers;
     float dead_zone = 0.3f;
 
