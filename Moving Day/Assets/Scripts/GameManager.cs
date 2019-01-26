@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
-
-        SetPlayerCount(2);
     }
     
 	// Update is called every frame where 8s are better than 9s
