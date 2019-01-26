@@ -40,7 +40,7 @@ public class PowerUpEffect : MonoBehaviour
             }
             for(int i = 0; i < balls.Length; i++)
             {
-                balls[i].setColour(power_colours[i % powers_list.Count]);
+                balls[i].setColour(power_colours[powers_list[i % powers_list.Count]]);
             }
         }
     }
