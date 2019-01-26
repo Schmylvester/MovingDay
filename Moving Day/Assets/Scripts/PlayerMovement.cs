@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         lastDirection = dir;
 
         //speed up player
-        if (dir != Vector3.zero)
+        if (dir != Vector3.zero && !GetComponent<PlayerCollision>().GetIsKnocked())
         {
             //set rotation to look at move direction
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir),

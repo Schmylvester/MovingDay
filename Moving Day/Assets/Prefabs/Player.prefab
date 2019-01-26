@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 135931904977250806}
   - component: {fileID: 114957165226396208}
   - component: {fileID: 136732551179474050}
+  - component: {fileID: 114228907074994658}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -876,7 +877,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222668611814234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 2.2117639, y: -4.7145324e-17, z: 2.1232367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4278329322512862}
@@ -1789,6 +1790,21 @@ MonoBehaviour:
   trail: {fileID: 96430314146628132}
   orbitRange: 0.6
   orbitSpeed: 3
+--- !u!114 &114228907074994658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222668611814234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df71ef51fc662004090cc83f4f84c695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isKnocked: 0
+  knockTimer: 0
+  knockForceDir: {x: 0, y: 0, z: 0}
+  playerAnimator: {fileID: 95143222355130848}
 --- !u!114 &114360400954180570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1936,7 +1952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbedObj: {fileID: 0}
   grabObjectPos: {fileID: 4560941224982396}
-  movement: {fileID: 0}
+  movement: {fileID: 114906872803386540}
   playerAnimator: {fileID: 95143222355130848}
 --- !u!135 &135931904977250806
 SphereCollider:
