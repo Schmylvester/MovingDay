@@ -59,7 +59,6 @@ public class CameraShake : MonoBehaviour
     public void SetBasePoint(Vector3 pos)
     {
         originalPos = pos;
-        Debug.Log(originalPos + ", " + pos);
     }
 
     public bool isEarthquake()

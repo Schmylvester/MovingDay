@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("")]
     [SerializeField] private bool has_started = false;
     [SerializeField] private GameObject[] players;
+    [SerializeField] ScoreBar scoreBar;
 
     private int clock_mins = 5;
     private float clock_secs = 0.0f;
@@ -41,8 +42,8 @@ public class GameManager : MonoBehaviour
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
-	}
-	
+    }
+    
 	// Update is called once per frame
 	void Update ()
     {
@@ -133,6 +134,7 @@ public class GameManager : MonoBehaviour
     public void ChangePlayerScore(int value, int id)
     {
         scores[id] += value;
+        scoreBar.scoreUpdated();
     }
 
     public int GetPlayerScore(int id)

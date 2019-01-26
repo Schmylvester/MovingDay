@@ -8,7 +8,6 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private GameObject CountdownHUD;
     [SerializeField] private GameObject HUD;
 
-    [SerializeField] private List<Text> player_scores;
     [SerializeField] private Text timer, countdown_text, events_text;
 
     private bool set_gui = false;
@@ -65,16 +64,11 @@ public class GameHUD : MonoBehaviour
         {
             countdown_text.text = "GO!";
         }
-        for(uint i = 0; i < player_scores.Count; i++)
-        {
-            player_scores[(int)i].text = game_manager.GetPlayerScore((int)i).ToString();
-        }
         events_text.text = "";
     }
 
     void GUIElements()
     {
-        player_scores.Clear();
         GameGUIElements();
 
         //Countdown Elements
@@ -104,10 +98,6 @@ public class GameHUD : MonoBehaviour
             for (uint i = 0; i < game_manager.GetPlayerCount(); i++)
             {
                 string title = "Player " + (i + 1).ToString() + " Score";
-                if (child.gameObject.name == title)
-                {
-                    player_scores.Add(child.GetComponent<Text>());
-                }
             }
             if (game_manager.GetPlayerCount() < 4)
             {
