@@ -25,9 +25,8 @@ public class PlayerMovement : MonoBehaviour
 	
 	void Update ()
 	{
-	 //   InputManager iM = GameObject.Find("tempManager").GetComponent<InputManager>();
-
-        Vector3 dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	    InputManager iM = FindObjectOfType<InputManager>();
+        Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0, iM.getAxis(Axis.Left_Vertical, playerID));
 
         //speed up player
         if (dir != Vector3.zero)
