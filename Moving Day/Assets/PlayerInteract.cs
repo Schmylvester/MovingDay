@@ -62,15 +62,8 @@ public class PlayerInteract : MonoBehaviour
             {
                 grabbedObj = _grab_gobj;
                 grabbedObj.transform.parent = transform;
-                grabbedObj.transform.rotation = transform.rotation;
-
-              //  Vector3 offsetPos = grabObjectPos.position + new Vector3(0, _grab_gobj.GetComponent<BoxCollider>().size.y / 2, _grab_gobj.GetComponent<BoxCollider>().size.z / 2);
-
-               // grabbedObj.transform.position = offsetPos;
-
-                _grab_gobj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
+                grabbedObj.transform.position = grabObjectPos.position;
                 grabbedObj.GetComponent<Rigidbody>().useGravity = false;
-             //   grabbedObj.transform.parent = transform;
 
                 grabbed = true;
             }

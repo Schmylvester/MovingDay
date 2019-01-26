@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 	    InputManager iM = FindObjectOfType<InputManager>();
         Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0, iM.getAxis(Axis.Left_Vertical, playerID));
 
-	    dir = dir.normalized;
-
 	    lastDirection = dir;
 
         //speed up player
