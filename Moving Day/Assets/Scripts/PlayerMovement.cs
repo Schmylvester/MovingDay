@@ -72,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(groundPoint.transform.position, -Vector3.up, 0.1f);
         if (grounded && !jumping)
         {
+            playerAnimator.SetBool("Jumping", false);
+
             if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
             {
                 jumping = true;
@@ -81,12 +83,15 @@ public class PlayerMovement : MonoBehaviour
 
                 jumpSpeed = 2.5f;
 
+                playerAnimator.SetBool("Jumping", true);
+
+
             }
         }
         else
         {
             if (jumping)
-            {
+            {            
                 jumpSpeed -= 0.1f;
                 transform.Translate(transform.up * Time.deltaTime * jumpSpeed, Space.World);
 

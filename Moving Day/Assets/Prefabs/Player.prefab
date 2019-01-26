@@ -1903,9 +1903,6 @@ MonoBehaviour:
   playerAnimator: {fileID: 95143222355130848}
   jumpMax: 0
   groundPoint: {fileID: 4965582466954830}
-  jumpForce: 2
-  jumpArcRate: 0.1
-  jumpHeight: 1.5
 --- !u!114 &114917218955317140
 MonoBehaviour:
   m_ObjectHideFlags: 1
