@@ -7,12 +7,11 @@ public class ScoreBar : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] RectTransform[] bars;
     ushort playerCount = 0;
+    bool score_happened = false;
 
     private void Start()
     {
         playerCount = (ushort)gameManager.GetPlayerCount();
-        for (ushort i = 0; i < playerCount; i++)
-            bars[i].gameObject.SetActive(true);
     }
 
     public void scoreUpdated()
@@ -24,6 +23,12 @@ public class ScoreBar : MonoBehaviour
         }
         if (scoreSum != 0)
         {
+            if (!score_happened)
+            {
+                score_happened = true;
+                for (ushort i = 0; i < playerCount; i++)
+                    bars[i].gameObject.SetActive(true);
+            }
             float scorePortion = 0;
             for (ushort i = 0; i < playerCount; i++)
             {

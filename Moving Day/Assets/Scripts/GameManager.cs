@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
     }
-	
+    
 	// Update is called once per frame
 	void Update ()
     {
