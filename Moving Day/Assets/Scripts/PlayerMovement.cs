@@ -24,30 +24,34 @@ public class PlayerMovement : MonoBehaviour
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
     }
-	
-	void Update ()
-	{
-	    InputManager iM = FindObjectOfType<InputManager>();
-        Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0, iM.getAxis(Axis.Left_Vertical, playerID));
 
-	    dir = dir.normalized;
-	    lastDirection = dir;
+
+    void Update()
+    {
+        //movement stuff --
+        InputManager iM = FindObjectOfType<InputManager>();
+        Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0,
+            iM.getAxis(Axis.Left_Vertical, playerID));
+
+        dir = dir.normalized;
+        lastDirection = dir;
 
         //speed up player
         if (dir != Vector3.zero)
-	    {
+        {
             //set rotation to look at move direction
-	        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir),
+                Time.deltaTime * rotationSpeed);
             playerAnimator.SetBool("Walking", true);
 
             if (currentSpeed < moveSpeed)
-	        {
-	            currentSpeed += speedUpRate;
-	        }
-	        else
-	        {
-	            currentSpeed = moveSpeed;
-	        }       
+            {
+                currentSpeed += speedUpRate;
+            }
+            else
+            {
+                currentSpeed = moveSpeed;
+            }
         }
         else
         {
@@ -56,7 +60,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
+
+        //jumping stuff
+        if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
+        {
+        }
     }
+
 
     /// <summary>
     /// Set new maximum move speed for the player

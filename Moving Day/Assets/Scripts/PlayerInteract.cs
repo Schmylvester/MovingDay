@@ -10,8 +10,11 @@ public class PlayerInteract : MonoBehaviour
     private float dropOverLapDelay;
     bool grabbed;
 
-	// Use this for initialization
-	void Start ()
+
+    [SerializeField] private Animator playerAnimator;
+
+    // Use this for initialization
+    void Start ()
 	{
 		
 	}
@@ -50,6 +53,8 @@ public class PlayerInteract : MonoBehaviour
             grabbedObj = null;
             grabbed = false;
             dropOverLapDelay = 0;
+
+            playerAnimator.SetBool("IsHolding", false);
         }
     }
 
@@ -67,6 +72,8 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
                 grabbedObj.GetComponent<Rigidbody>().useGravity = false;
                 grabbed = true;
+
+                playerAnimator.SetBool("IsHolding", true);
             }
         }
     }
