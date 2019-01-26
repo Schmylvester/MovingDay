@@ -102,6 +102,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 GetPlayerForceDirection()
     {
-        return lastDirection.normalized * currentSpeed;
+        return (lastDirection.normalized * currentSpeed) * 2;
     }
 }
