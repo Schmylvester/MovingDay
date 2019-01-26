@@ -7,16 +7,17 @@ public class CameraScript : MonoBehaviour {
 	[SerializeField] List<GameObject> points;
 	[SerializeField] Vector3 offset;
 
-
+    CameraShake camera_shake;
 
     // Use this for initialization
-    void Start () {
-	
+    void Start ()
+    {
+        camera_shake = FindObjectOfType<CameraShake>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
 		Vector3 midpoint = new Vector3(0,0,0);
 		int count = 0;
 		GameObject parent = transform.parent.gameObject;
@@ -27,13 +28,19 @@ public class CameraScript : MonoBehaviour {
 			count++;
 		}
 
-		midpoint = midpoint / count;
+        midpoint = midpoint / count;
 
-		midpoint.y = parent.transform.position.y;
+        midpoint.y = parent.transform.position.y;
 
-		midpoint.z += offset.z;
-		 
-		parent.transform.position = midpoint;
+        midpoint.z += offset.z;
+
+        if (!camera_shake.isEarthquake())
+        {
+            parent.transform.position = midpoint;
+        }
+
+        camera_shake.SetBasePoint(midpoint);
+        Debug.Log(midpoint);
 
 		//find the the two players that are furthest apart
 		//get their distance and use that to calculate how far to zoom out

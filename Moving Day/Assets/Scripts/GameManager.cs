@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EventsManager event_manager;
     [SerializeField] private CameraScript camera_script;
 
+    [Header("")]
     [SerializeField] private bool has_started = false;
     [SerializeField] private GameObject[] players;
 
     private int clock_mins = 5;
-    private float clock_secs = 1.0f;
+    private float clock_secs = 0.0f;
 
     private float countdown_secs = 3.0f;
 
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void SetGame(int mins = 5, float secs = 1.0f, int player_count = 1)
     {
-        SetPlayerCount(player_count);
+        ResetPlayerCount(player_count);
         clock_mins = mins;
         clock_secs = secs;
         countdown_secs = 3.0f;
@@ -139,8 +140,8 @@ public class GameManager : MonoBehaviour
         return scores[id];
     }
 
-    //Resets Score List for New Game
-    public void SetPlayerCount(int player_count = 1)
+    //Resets Player List and Scores for New Game
+    public void ResetPlayerCount(int player_count = 1)
     {
         scores.Clear();
         for(uint i = 0; i < player_count; i++)
