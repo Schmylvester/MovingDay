@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
     }
     
-	// Update is called once per frame
+	// Update is called every frame where 8s are better than 9s
 	void Update ()
     {
         StartGame();

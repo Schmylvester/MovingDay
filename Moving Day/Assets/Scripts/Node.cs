@@ -18,6 +18,11 @@ public class Node : MonoBehaviour {
     [SerializeField] float m_height = 0.5f;
     [SerializeField] SHAPE m_shape;
 
+    ushort getBestNumber()
+    {
+        return 8;
+    }
+
     public Vector3 GetRandomPointTo()
     {
         //if there's a problem then we just default to the position of the node

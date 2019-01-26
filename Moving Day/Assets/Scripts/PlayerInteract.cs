@@ -6,12 +6,16 @@ public class PlayerInteract : MonoBehaviour
 {
     public GameObject grabbedObj;
     [SerializeField] private Transform grabObjectPos;
+    [SerializeField] PlayerMovement movement;
 
     private float dropOverLapDelay;
     bool grabbed;
 
-	// Use this for initialization
-	void Start ()
+
+    [SerializeField] private Animator playerAnimator;
+
+    // Use this for initialization
+    void Start ()
 	{
 		
 	}
@@ -21,21 +25,21 @@ public class PlayerInteract : MonoBehaviour
 	{
 	    //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
-	    {
-	        InputManager iM = FindObjectOfType<InputManager>();
-	        if (iM.buttonUp(XboxButton.B, GetComponent<PlayerMovement>().GetPlayerID()))
-	        {
-	            DropObject();
-	        }
-	    }
-	    else
-	    {
-	        if (grabbed)
-	        {
-	            dropOverLapDelay += Time.deltaTime;
+        {
+            InputManager iM = FindObjectOfType<InputManager>();
+            if (iM.buttonUp(XboxButton.B, GetComponent<PlayerMovement>().GetPlayerID()))
+            {
+                DropObject();
             }
-	    }
-	}
+        }
+        else
+        {
+            if (grabbed)
+            {
+                dropOverLapDelay += Time.deltaTime;
+            }
+        }
+    }
 
 
     void DropObject()
@@ -45,11 +49,14 @@ public class PlayerInteract : MonoBehaviour
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
             grabbedObj.GetComponent<Rigidbody>().useGravity = true;
+            grabbedObj.GetComponent<ObjectData>().putDown();
 
 
             grabbedObj = null;
             grabbed = false;
             dropOverLapDelay = 0;
+
+            playerAnimator.SetBool("IsHolding", false);
         }
     }
 
@@ -67,6 +74,8 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
                 grabbedObj.GetComponent<Rigidbody>().useGravity = false;
                 grabbed = true;
+
+                playerAnimator.SetBool("IsHolding", true);
             }
         }
     }
@@ -78,5 +87,16 @@ public class PlayerInteract : MonoBehaviour
         {
             GrabObject(_col.gameObject);
         }
+    }
+
+
+    public GameObject GetHeldObject()
+    {
+        if (grabbedObj != null)
+        {
+            return grabbedObj;
+        }
+
+        return null;
     }
 }
