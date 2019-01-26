@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EventsManager : MonoBehaviour
 {
+    private bool display_text = false;
+
+    private GameHUD game_hud;
+
     private float clock_seconds = 0, event_time = 0;
 
     private CameraShake camera_shake;
@@ -13,6 +17,8 @@ public class EventsManager : MonoBehaviour
     {
         event_time = Random.Range(5, 60);
         camera_shake = FindObjectOfType<CameraShake>();
+        game_hud = FindObjectOfType<GameHUD>();
+        game_hud.SetEventText("");
 	}
 
     public void EventChecker(float dt)
@@ -50,15 +56,18 @@ public class EventsManager : MonoBehaviour
     {
         if(camera_shake)
         camera_shake.SetShake(5, 0.7f);
-        Debug.Log("EARTHQUAKE!");
+        game_hud.SetEventText("EARTHQUAKE!");
     }
 
     void Train()
     {
         TrainEmitter[] train_em = FindObjectsOfType<TrainEmitter>();
 
-        int rand_num = (int)Random.Range(0, train_em.Length);
-
-        train_em[rand_num].SpawnTrain();
+        if (train_em.Length > 0)
+        {
+            int rand_num = (int)Random.Range(0, train_em.Length);
+            train_em[rand_num].SpawnTrain();
+        }
+        game_hud.SetEventText("CHOO! CHOO!");
     }
 }

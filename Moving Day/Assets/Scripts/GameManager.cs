@@ -6,12 +6,21 @@ public class GameManager : MonoBehaviour
 {
     public bool has_ended { get; set; }
 
-    [SerializeField] private bool has_started = false;
+    [Header("Spawn")]
+    [SerializeField] private Transform[] spawn_points;
+    [SerializeField] private GameObject player_prefab;
+
+    [Header("Managers")]
     [SerializeField] private EventsManager event_manager;
+    [SerializeField] private CameraScript camera_script;
+
+    [Header("")]
+    [SerializeField] private bool has_started = false;
+    [SerializeField] private GameObject[] players;
     [SerializeField] ScoreBar scoreBar;
 
     private int clock_mins = 5;
-    private float clock_secs = 1.0f;
+    private float clock_secs = 0.0f;
 
     private float countdown_secs = 3.0f;
 
@@ -20,7 +29,10 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
     {
-        SetGame();
+        SetPlayerColours();
+        scoreBar = FindObjectOfType<ScoreBar>();
+        camera_script = FindObjectOfType<CameraScript>();
+        SetGame(5, 1.0f, 1);
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -33,6 +45,7 @@ public class GameManager : MonoBehaviour
 		if(has_started && !has_ended)
         {
             GameClock();
+            scoreBar.scoreUpdated();
             event_manager.EventChecker(Time.deltaTime);
         }
         else if(has_ended)
@@ -76,9 +89,10 @@ public class GameManager : MonoBehaviour
 
     public void SetGame(int mins = 5, float secs = 1.0f, int player_count = 1)
     {
-        SetPlayerCount(player_count);
+        ResetPlayerCount(player_count);
         clock_mins = mins;
         clock_secs = secs;
+        countdown_secs = 3.0f;
     }
 
     void StartGame()
@@ -123,14 +137,29 @@ public class GameManager : MonoBehaviour
         return scores[id];
     }
 
-    //Resets Score List for New Game
-    public void SetPlayerCount(int player_count = 1)
+    //Resets Player List and Scores for New Game
+    public void ResetPlayerCount(int player_count = 1)
     {
         scores.Clear();
         for(uint i = 0; i < player_count; i++)
         {
             scores.Add(0);
         }
+        InitialisePlayers(player_count);
+    }
+
+    void InitialisePlayers(int player_count)
+    {
+        for(uint i = 0; i < player_count; i++)
+        {
+            GameObject player = Instantiate(player_prefab, spawn_points[i].position, spawn_points[i].rotation);
+            camera_script.addPoint(player);
+        }
+        SetPlayerColours();
+
+        scoreBar.ChangePlayerCount();
+
+        has_started = false;
     }
 
     public int GetPlayerCount()
@@ -147,6 +176,34 @@ public class GameManager : MonoBehaviour
         else
         {
             return "Timer";
+        }
+    }
+
+    Color PlayerColour(int id)
+    {
+        switch(id)
+        {
+            case 1:
+                return Color.red;
+            case 2:
+                Color purple = new Vector4(0.5849f, 0, 0.5802f, 1);
+                return purple;
+            case 3:
+                Color orange = new Vector4(1, 0.6171f, 0, 1);
+                return orange;
+            default:
+                return Color.blue;
+        }
+    }
+
+    void SetPlayerColours()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        for (uint i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerMovement>().SetID((int)i);
+            players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
         }
     }
 }

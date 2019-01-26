@@ -19,10 +19,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4228054701052936}
-  - component: {fileID: 114694625694678114}
   - component: {fileID: 114966995578949106}
   - component: {fileID: 114616273235789076}
   - component: {fileID: 114058553358164116}
+  - component: {fileID: 114863083681637536}
+  - component: {fileID: 114778258496751412}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -36,7 +37,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1754717064521268}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -68,6 +69,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1754717064521268}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2065e63abbfac18458c57f27161859df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  shake_duration: 3
+  shake_amount: 0.7
+--- !u!114 &114778258496751412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1754717064521268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96bd99bd369098140941ade8eb755834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -76,7 +91,23 @@ MonoBehaviour:
   timer: {fileID: 0}
   countdown_text: {fileID: 0}
   events_text: {fileID: 0}
---- !u!114 &114694625694678114
+--- !u!114 &114810886388156830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96bd99bd369098140941ade8eb755834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CountdownHUD: {fileID: 0}
+  HUD: {fileID: 0}
+  timer: {fileID: 0}
+  countdown_text: {fileID: 0}
+  events_text: {fileID: 0}
+--- !u!114 &114863083681637536
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,6 +129,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f00df4158549546930a9663a80d3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn_points:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  player_prefab: {fileID: 1222668611814234, guid: 228f8faf5727b944abe3083be84fafb2,
+    type: 2}
+  event_manager: {fileID: 0}
+  camera_script: {fileID: 0}
   has_started: 0
-  event_manager: {fileID: 114694625694678114}
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   scoreBar: {fileID: 114058553358164116}
