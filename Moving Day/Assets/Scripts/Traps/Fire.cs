@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
+    ParticleSystem.MainModule particles;
+
     float spread_timer = 0;
 
     SphereCollider sphere_collider;
 
     private void Start()
     {
-        sphere_collider = GetComponentInChildren<SphereCollider>();
+        sphere_collider = GetComponent<SphereCollider>();
+        particles = GetComponent<ParticleSystem>().main;
     }
 
     private void Update()
@@ -32,6 +35,8 @@ public class Fire : MonoBehaviour
         float scale_value = 0.25f * Time.deltaTime;
         Vector3 add_scale = new Vector3(scale_value, scale_value, scale_value);
         transform.localScale += add_scale;
+        particles.startSpeed = new ParticleSystem.MinMaxCurve(2.5f, 10f);
+        particles.startSize = new ParticleSystem.MinMaxCurve(5f, 10f);
     }
 
     private void OnTriggerEnter(Collider other)
