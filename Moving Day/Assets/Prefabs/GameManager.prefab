@@ -100,3 +100,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   has_started: 0
   event_manager: {fileID: 114694625694678114}
+  scoreBar: {fileID: 114058553358164116}
