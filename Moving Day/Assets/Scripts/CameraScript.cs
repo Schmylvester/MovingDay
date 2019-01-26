@@ -6,7 +6,9 @@ public class CameraScript : MonoBehaviour {
 
 	[SerializeField] List<GameObject> points;
 	[SerializeField] Vector3 offset;
-
+    [SerializeField] float m_zoomFactor = 1;
+    [SerializeField] float max_zoomDistance;
+    [SerializeField] float min_zoomDistance;
 
 
     // Use this for initialization
@@ -49,10 +51,22 @@ public class CameraScript : MonoBehaviour {
 			}
 		}
 
+        if (furthestDistance < min_zoomDistance)
+        {
+            furthestDistance = min_zoomDistance;
+        }
+
+        if (furthestDistance > max_zoomDistance)
+        {
+            furthestDistance = max_zoomDistance;
+        }
+
 		Vector3 zoom = Vector3.zero;
-		zoom.y += furthestDistance / 2;
-		zoom.z -= furthestDistance / 2;
+		zoom.y += furthestDistance / m_zoomFactor;
+		zoom.z -= furthestDistance / m_zoomFactor;
 		this.transform.localPosition = zoom;
+
+        GetComponent<Camera>().transform.LookAt(midpoint);
 
 	}
 

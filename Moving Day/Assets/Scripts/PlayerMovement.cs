@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start ()
     {
+        moveSpeed = default_max;
+        speedUpRate = default_accel;
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
     }
@@ -130,6 +132,12 @@ public class PlayerMovement : MonoBehaviour
         speedUpRate = _speed_up_rate;
     }
 
+    public void resetSpeed()
+    {
+        moveSpeed = default_max;
+        speedUpRate = default_accel;
+    }
+
     /// <summary>
     /// Resets max move speed and speed up rate to default;
     /// </summary>
@@ -151,6 +159,10 @@ public class PlayerMovement : MonoBehaviour
         return playerID;
     }
 
+    bool areEightsBetterThanNines()
+    {
+        return true;
+    }
 
     public Vector3 GetPlayerForceDirection()
     {
