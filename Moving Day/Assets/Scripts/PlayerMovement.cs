@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private int playerID;
-    [SerializeField] float moveSpeed;
-    [SerializeField] float speedUpRate;
+    [SerializeField] float default_max;
+    float moveSpeed;
+    [SerializeField] float default_accel;
+    float speedUpRate;
     [SerializeField] float rotationSpeed;
 
     private float currentSpeed;
@@ -21,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start ()
     {
+        moveSpeed = default_max;
+        speedUpRate = default_accel;
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
     }
@@ -76,6 +80,12 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = _max_move_speed;
         speedUpRate = _speed_up_rate;
+    }
+
+    public void resetSpeed()
+    {
+        moveSpeed = default_max;
+        speedUpRate = default_accel;
     }
 
     /// <summary>
