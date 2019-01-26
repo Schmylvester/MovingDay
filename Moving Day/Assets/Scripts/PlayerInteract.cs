@@ -14,6 +14,8 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
+    private Vector3 gobjLocalPos;
+
     // Use this for initialization
     void Start ()
 	{
@@ -36,8 +38,13 @@ public class PlayerInteract : MonoBehaviour
         {
             if (grabbed)
             {
-                dropOverLapDelay += Time.deltaTime;
+                dropOverLapDelay += Time.deltaTime;             
             }
+        }
+
+	    if (grabbedObj != null)
+	    {
+	        grabbedObj.transform.localPosition = gobjLocalPos;
         }
     }
 
@@ -48,7 +55,6 @@ public class PlayerInteract : MonoBehaviour
         {
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
-            grabbedObj.GetComponent<Rigidbody>().useGravity = true;
             grabbedObj.GetComponent<ObjectData>().putDown();
 
 
@@ -72,8 +78,9 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.transform.rotation = transform.rotation;
 
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
-                grabbedObj.GetComponent<Rigidbody>().useGravity = false;
                 grabbed = true;
+
+                gobjLocalPos = grabbedObj.transform.localPosition;
 
                 playerAnimator.SetBool("IsHolding", true);
             }
