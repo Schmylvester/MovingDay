@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private int playerID;
 
+    [SerializeField] float default_max;
+    [SerializeField] float default_accel;
+
     [SerializeField] float moveSpeed;
     [SerializeField] float speedUpRate;
     [SerializeField] float rotationSpeed;
@@ -37,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //movement stuff --
         InputManager iM = FindObjectOfType<InputManager>();
+
         Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0,
             iM.getAxis(Axis.Left_Vertical, playerID));
 
