@@ -51,8 +51,11 @@ public class GameHUD : MonoBehaviour
         }
         else
         {
-            CountdownHUD.SetActive(false);
-            HUD.SetActive(true);
+            if (CountdownHUD)
+            {
+                CountdownHUD.SetActive(false);
+                HUD.SetActive(true);
+            }
         }
 
         if(show_event_text)
@@ -70,7 +73,10 @@ public class GameHUD : MonoBehaviour
 
     private void OnGUI()
     {
-        timer.text = game_manager.GetTimer();
+        if (timer)
+        {
+            timer.text = game_manager.GetTimer();
+        }
         if (countdown_text.text != "0")
         {
             countdown_text.text = game_manager.GetTimer();

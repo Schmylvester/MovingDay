@@ -41,7 +41,7 @@ public class EventsManager : MonoBehaviour
         {
             Events();
         }
-        Debug.Log("Event time: " + event_time);
+        //Debug.Log("Event time: " + event_time);
     }
 
     void Events()

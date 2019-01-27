@@ -8,10 +8,23 @@ public class ScoreBar : MonoBehaviour
     [SerializeField] RectTransform[] bars;
     ushort playerCount = 0;
     bool score_happened = false;
+    float[] target_scale;
 
     private void Start()
     {
         playerCount = (ushort)gameManager.GetPlayerCount();
+        target_scale = new float[playerCount];
+    }
+
+    private void Update()
+    {
+        for (ushort i = 0; i < playerCount; i++)
+        {
+            if (bars[i])
+            {
+                bars[i].localScale += new Vector3(Time.deltaTime * (target_scale[i] - bars[i].localScale.x), 0, 0);
+            }
+        }
     }
 
     public void ChangePlayerCount()
@@ -38,7 +51,7 @@ public class ScoreBar : MonoBehaviour
             for (ushort i = 0; i < playerCount; i++)
             {
                 scorePortion += (float)gameManager.GetPlayerScore(i) / scoreSum;
-                bars[i].localScale = new Vector3(scorePortion, 1, 1);
+                target_scale[i] = scorePortion;
             }
         }
     }

@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public bool has_ended { get; set; }
+
+    bool winScene = false;
 
     [Header("Spawn")]
     [SerializeField] private Transform[] spawn_points;
@@ -24,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private float countdown_secs = 3.0f;
 
+    int roomCount = 5;
+    List<int[]> roomScores = new List<int[]>();
     private List<int> scores = new List<int>();
 
 	// Use this for initialization
@@ -32,7 +37,20 @@ public class GameManager : MonoBehaviour
         SetPlayerColours();
         scoreBar = FindObjectOfType<ScoreBar>();
         camera_script = FindObjectOfType<CameraScript>();
-        SetGame(5, 1.0f, 1);
+        GameObject settings_object = GameObject.Find("GameSettings");
+        GameSettings settings = null;
+        if (settings_object)
+        {
+            settings = settings_object.GetComponent<GameSettings>();
+        }
+        if (settings)
+        {
+            SetGame(settings.m_minutes, settings.m_seconds, settings.m_players);
+        }
+        else
+        {
+            SetGame();
+        }
         event_manager = GetComponent<EventsManager>();
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
@@ -50,7 +68,11 @@ public class GameManager : MonoBehaviour
         }
         else if(has_ended)
         {
+            if (!winScene)
+            {
             EndGame();
+            winScene = true;
+            }
         }
 	}
 
@@ -87,7 +109,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGame(int mins = 5, float secs = 1.0f, int player_count = 1)
+    public void SetGame(int mins = 1, float secs = 1.0f, int player_count = 1)
     {
         ResetPlayerCount(player_count);
         clock_mins = mins;
@@ -111,24 +133,41 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-        float high_score = float.MinValue;
-        int winner_id = -1;
-
-        for(uint i = 0; i < scores.Count; i++)
+        List<int> finalScores = new List<int>();
+        for(int i = 0; i < scores.Count; i++)
         {
-            if(scores[(int)i] >= high_score)
+            finalScores.Add(0);
+        }
+        for(int room = 0; room < roomCount; room++)
+        {
+            int bestPlayer = 0;
+            for(int player = 1; player < scores.Count; player++)
             {
-                high_score = scores[(int)i];
-                winner_id = (int)i;
+                if(roomScores[player][room] > roomScores[bestPlayer][room])
+                {
+                    bestPlayer = player;
+                }
             }
+            finalScores[bestPlayer]++;
         }
 
-        Debug.Log("WINNER - " + winner_id);
+        int winner = 0;
+        for (int player = 1; player < scores.Count; player++)
+        {
+            if (finalScores[player] > finalScores[winner])
+            {
+                winner = player;
+            }
+            winScene = true;
+        }
+        SceneManager.LoadScene("WinScene");
+        Debug.Log("Player " + (winner + 1).ToString() + " wins!");        
     }
 
-    public void ChangePlayerScore(int value, int id)
+    public void ChangePlayerScore(int value, int id, int room)
     {
         scores[id] += value;
+        roomScores[id][room] += value;
         scoreBar.scoreUpdated();
     }
 
@@ -141,9 +180,11 @@ public class GameManager : MonoBehaviour
     public void ResetPlayerCount(int player_count = 1)
     {
         scores.Clear();
+        roomScores.Clear();
         for(uint i = 0; i < player_count; i++)
         {
             scores.Add(0);
+            roomScores.Add(new int[roomCount]);
         }
         InitialisePlayers(player_count);
     }

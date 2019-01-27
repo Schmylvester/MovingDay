@@ -14,16 +14,18 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
+    private Vector3 gobjLocalPos;
+
     // Use this for initialization
-    void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    //delay so drop input isnt dected instantly (could be couroutine wait???)
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
         {
             InputManager iM = FindObjectOfType<InputManager>();
@@ -36,19 +38,23 @@ public class PlayerInteract : MonoBehaviour
         {
             if (grabbed)
             {
-                dropOverLapDelay += Time.deltaTime;
+                dropOverLapDelay += Time.deltaTime;             
             }
+        }
+
+	    if (grabbedObj != null)
+	    {
+	        grabbedObj.transform.localPosition = gobjLocalPos;
         }
     }
 
 
-    void DropObject()
+    public void DropObject()
     {
         if (grabbedObj != null)
         {
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
-            grabbedObj.GetComponent<Rigidbody>().useGravity = true;
             grabbedObj.GetComponent<ObjectData>().putDown();
 
 
@@ -72,8 +78,9 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.transform.rotation = transform.rotation;
 
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
-                grabbedObj.GetComponent<Rigidbody>().useGravity = false;
                 grabbed = true;
+
+                gobjLocalPos = grabbedObj.transform.localPosition;
 
                 playerAnimator.SetBool("IsHolding", true);
             }

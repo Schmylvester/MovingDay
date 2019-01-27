@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4185ead7ab6e7478ba23df419be581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_players: 2
+  max_players: 4

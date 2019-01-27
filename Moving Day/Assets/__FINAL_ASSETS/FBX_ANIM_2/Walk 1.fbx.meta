@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 32a42aff54a84be40a9ac1217a584103
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: JointRig2:Fadult_jump:hip
+    100002: JointRig2:Fadult_jump:joint1
+    100004: JointRig2:Fadult_jump:joint10
+    100006: JointRig2:Fadult_jump:joint11
+    100008: JointRig2:Fadult_jump:joint11 1
+    100010: JointRig2:Fadult_jump:joint12
+    100012: JointRig2:Fadult_jump:joint12 1
+    100014: JointRig2:Fadult_jump:joint13
+    100016: JointRig2:Fadult_jump:joint2
+    100018: JointRig2:Fadult_jump:joint3
+    100020: JointRig2:Fadult_jump:joint4
+    100022: JointRig2:Fadult_jump:joint5
+    100024: JointRig2:Fadult_jump:joint6
+    100026: JointRig2:Fadult_jump:joint7
+    100028: JointRig2:Fadult_jump:joint7 1
+    100030: JointRig2:Fadult_jump:joint8
+    100032: JointRig2:Fadult_jump:joint8 1
+    100034: JointRig2:Fadult_jump:joint9
+    100036: JointRig2:Fadult_jump:nurbsCircle1
+    100038: JointRig2:Fadult_jump:pSphere2
+    100040: JointRig2:Fadult_jump:pSphere2 1
+    100042: JointRig2:Fadult_jump:spinectrl
+    100044: JointRig2:Fadult_jump:transform1
+    100046: JointRig2:Fadult_jump:transform2
+    100048: JointRig2:Fadult_jump:transform3
+    100050: JointRig2:Fadult_jump:transform4
+    100052: JointRig2:Fadult_jump:transform5
+    100054: JointRig2:Fadult_jump:transform6
+    100056: JointRig2:pCube1
+    100058: JointRig2:polySurface1
+    100060: JointRig2:polySurface2
+    100062: JointRig2:polySurface3
+    100064: JointRig2:polySurface4
+    100066: JointRig2:polySurface6
+    100068: JointRig2:transform1
+    100070: //RootNode
+    400000: JointRig2:Fadult_jump:hip
+    400002: JointRig2:Fadult_jump:joint1
+    400004: JointRig2:Fadult_jump:joint10
+    400006: JointRig2:Fadult_jump:joint11
+    400008: JointRig2:Fadult_jump:joint11 1
+    400010: JointRig2:Fadult_jump:joint12
+    400012: JointRig2:Fadult_jump:joint12 1
+    400014: JointRig2:Fadult_jump:joint13
+    400016: JointRig2:Fadult_jump:joint2
+    400018: JointRig2:Fadult_jump:joint3
+    400020: JointRig2:Fadult_jump:joint4
+    400022: JointRig2:Fadult_jump:joint5
+    400024: JointRig2:Fadult_jump:joint6
+    400026: JointRig2:Fadult_jump:joint7
+    400028: JointRig2:Fadult_jump:joint7 1
+    400030: JointRig2:Fadult_jump:joint8
+    400032: JointRig2:Fadult_jump:joint8 1
+    400034: JointRig2:Fadult_jump:joint9
+    400036: JointRig2:Fadult_jump:nurbsCircle1
+    400038: JointRig2:Fadult_jump:pSphere2
+    400040: JointRig2:Fadult_jump:pSphere2 1
+    400042: JointRig2:Fadult_jump:spinectrl
+    400044: JointRig2:Fadult_jump:transform1
+    400046: JointRig2:Fadult_jump:transform2
+    400048: JointRig2:Fadult_jump:transform3
+    400050: JointRig2:Fadult_jump:transform4
+    400052: JointRig2:Fadult_jump:transform5
+    400054: JointRig2:Fadult_jump:transform6
+    400056: JointRig2:pCube1
+    400058: JointRig2:polySurface1
+    400060: JointRig2:polySurface2
+    400062: JointRig2:polySurface3
+    400064: JointRig2:polySurface4
+    400066: JointRig2:polySurface6
+    400068: JointRig2:transform1
+    400070: //RootNode
+    2100000: JointRig2_lambert2
+    4300000: JointRig2:Fadult_jump:pSphere2
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: JointRig2:Fadult_jump:pSphere2
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1000
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
