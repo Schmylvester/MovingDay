@@ -527,9 +527,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '2
-
-'
+  m_Text: 4
 --- !u!222 &1008351540
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -564,7 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdd54b69e18b4b498547ffd56cca45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_minutes: 3
+  m_minutes: 180
   m_seconds: 0
   m_players: 2
 --- !u!4 &1180136749
@@ -786,7 +784,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3:00
+  m_Text: 5:00
 --- !u!222 &1402210907
 CanvasRenderer:
   m_ObjectHideFlags: 0
