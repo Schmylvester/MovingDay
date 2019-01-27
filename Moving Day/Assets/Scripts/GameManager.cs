@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    Color PlayerColour(int id)
+    public Color PlayerColour(int id)
     {
         switch (id)
         {
