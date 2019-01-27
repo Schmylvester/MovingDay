@@ -40,7 +40,7 @@ public class Train : MonoBehaviour
                 break;
         }
 
-        if(lifetime > 1.5)
+        if(lifetime > 1.75)
         {
             Destroy(gameObject);
         }
