@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
                     bestPlayer = player;
                 }
             }
-            if(roomScores[bestPlayer][room] > 0)
+            if (roomScores[bestPlayer][room] > 0)
                 finalScores[bestPlayer]++;
         }
         winner = 0;
@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
     {
         scores[id] += value;
         roomScores[id][room] += value;
+        assignRooms();
         scoreBar.scoreUpdated();
     }
 
@@ -258,5 +259,31 @@ public class GameManager : MonoBehaviour
         else
             return winner;
         return -1;
+    }
+
+    void assignRooms()
+    {
+        Debug.Log("Rooms: " + roomCount);
+        int[] roomOwners = new int[roomCount];
+        for (int i = 0; i < roomCount; i++)
+        {
+            //get best player score for this room
+            int best_player = 0;
+            for (int j = 1; j < GetPlayerCount(); j++)
+            {
+                if (roomScores[j][i] > roomScores[best_player][i])
+                    best_player = j;
+            }
+            if (roomScores[best_player][i] > 0)
+            {
+                roomOwners[i] = best_player;
+            }
+            else
+            {
+                roomOwners[i] = -1;
+            }
+        }
+
+        FindObjectOfType<SetFlagColours>().setFlagColours(roomOwners);
     }
 }

@@ -87,11 +87,6 @@ public class CameraScript : MonoBehaviour {
 
         float step = m_zoomSpeed * Time.deltaTime;
         this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, m_pointTo, step);
-        if (this.transform.localPosition == zoom)
-        {
-            Debug.Log("This code is being run");
-        }
-
     }
 
     public void addPoint(GameObject _newPoint)
@@ -117,8 +112,8 @@ public class CameraScript : MonoBehaviour {
             if (p == _removedPoint)
             {
                 points.Remove(_removedPoint);
+                break;
             }
-        }
-            
+        }   
     }
 }
