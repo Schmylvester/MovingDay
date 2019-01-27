@@ -27,9 +27,11 @@ public class GameManager : MonoBehaviour
 
     private float countdown_secs = 3.0f;
 
-    int roomCount = 5;
+    int roomCount = 4;
     List<int[]> roomScores = new List<int[]>();
     private List<int> scores = new List<int>();
+
+    int winner = -1;
 
     // Use this for initialization
     void Awake()
@@ -149,10 +151,13 @@ public class GameManager : MonoBehaviour
                     bestPlayer = player;
                 }
             }
-            finalScores[bestPlayer]++;
+            if(roomScores[bestPlayer][room] > 0)
+                finalScores[bestPlayer]++;
         }
+        for (int i = 0; i < 4; i++)
+            Debug.Log(finalScores[i] + " : player " + i);
 
-        int winner = 0;
+        winner = 0;
         for (int player = 1; player < scores.Count; player++)
         {
             if (finalScores[player] > finalScores[winner])
@@ -247,5 +252,14 @@ public class GameManager : MonoBehaviour
             players[i].GetComponent<PlayerMovement>().SetID((int)i);
             players[i].GetComponentInChildren<Renderer>().material.color = PlayerColour((int)i);
         }
+    }
+
+    public int getWinner()
+    {
+        if (winner == -1)
+            Debug.LogError("As far as I know the game is not over");
+        else
+            return winner;
+        return -1;
     }
 }

@@ -10,11 +10,18 @@ public class VanSpawner : MonoBehaviour
 
     public IEnumerator startSpawningVans()
     {
-        while (gameObject.activeSelf)
+        while (gameObject != null)
         {
-            Transform spawn = spawn_transforms[Random.Range(0, spawn_transforms.Length)];
-            Instantiate(van_prefab, spawn.position, spawn.rotation);
-            yield return new WaitForSeconds(Random.Range(spawn_delay.x, spawn_delay.y));
+            if (this != null)
+            {
+                Transform spawn = spawn_transforms[Random.Range(0, spawn_transforms.Length)];
+                Instantiate(van_prefab, spawn.position, spawn.rotation);
+                yield return new WaitForSeconds(Random.Range(spawn_delay.x, spawn_delay.y));
+            }
+            else
+                yield return null;
         }
+
+        yield return null;
     }
 }
