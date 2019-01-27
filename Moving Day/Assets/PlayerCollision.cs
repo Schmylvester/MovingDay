@@ -33,6 +33,8 @@ public class PlayerCollision : MonoBehaviour
         if (isKnocked)
         {
             Debug.Log("IS KNOCKED");
+            if (!GetComponent<AudioSource>().isPlaying)
+                GetComponent<AudioSource>().Play();
             if (knockTimer < 1)
             {
                 knockTimer += Time.deltaTime;

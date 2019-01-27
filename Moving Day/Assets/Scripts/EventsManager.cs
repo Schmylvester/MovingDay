@@ -9,6 +9,8 @@ public class EventsManager : MonoBehaviour
 
     [SerializeField] private Vector2 lower_bounds, upper_bounds;
 
+    [SerializeField] AudioClip m_earthQuakeSound;
+
     private bool display_text = false, is_quake = false;
 
     private GameHUD game_hud;
@@ -98,6 +100,9 @@ public class EventsManager : MonoBehaviour
 
     void InitialiseEarthquake()
     {
+        AudioSource source = GetComponent<AudioSource>();
+        source.clip = m_earthQuakeSound;
+        source.Play();
         if(camera_shake)
         camera_shake.SetShake(5f, 0.7f);
         game_hud.SetEventText("EARTHQUAKE!");
