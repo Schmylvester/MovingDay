@@ -117,6 +117,7 @@ public class CameraScript : MonoBehaviour {
             if (p == _removedPoint)
             {
                 points.Remove(_removedPoint);
+                break;
             }
         }
             
