@@ -148,7 +148,7 @@ public class Spawner : MonoBehaviour
         GameObject obj = Instantiate(m_spawned[_index], transform.position, transform.rotation);
         obj.GetComponent<Rigidbody>().AddForce(_force);
         int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
-        obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
+        obj.GetComponent<ObjectData>().setOwner(player);
     }
 
     //spawn from random 3d position in sphere
@@ -168,7 +168,7 @@ public class Spawner : MonoBehaviour
         obj.GetComponent<Rigidbody>().AddForce(_force);
 
         int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
-        obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
+        obj.GetComponent<ObjectData>().setOwner(player);
     }
 
     //spawn from random position in a circle
@@ -187,6 +187,6 @@ public class Spawner : MonoBehaviour
         obj.GetComponent<Rigidbody>().AddForce(_force);
 
         int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
-        obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
+        obj.GetComponent<ObjectData>().setOwner(player);
     }
 }

@@ -22,11 +22,11 @@ public class ObjectData : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
     }
 
-    public void setOwner(int to, Material mat)
+    public void setOwner(int to)
     {
         m_owner = to;
         foreach (MeshRenderer _renderer in GetComponentsInChildren<MeshRenderer>())
-            _renderer.material = mat;
+            _renderer.material = FindObjectOfType<ObjectManager>().getMaterial(to);
     }
 
     public WeightClass getWeight()

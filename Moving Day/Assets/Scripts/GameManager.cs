@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
         switch (id)
         {
             case 1:
-                return Color.red;
+                return Color.blue;
             case 2:
                 Color purple = new Vector4(0.5849f, 0, 0.5802f, 1);
                 return purple;
@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
                 Color orange = new Vector4(1, 0.6171f, 0, 1);
                 return orange;
             default:
-                return Color.blue;
+                return Color.red;
         }
     }
 
