@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameManager
   - TrainEmitter
+  - Wall
   layers:
   - Default
   - TransparentFX

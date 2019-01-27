@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    ParticleSystem.MainModule particles;
+    ParticleSystem.Particle particles;
 
     float spread_timer = 0;
 
@@ -13,12 +13,11 @@ public class Fire : MonoBehaviour
     private void Start()
     {
         sphere_collider = GetComponent<SphereCollider>();
-        particles = GetComponent<ParticleSystem>().main;
     }
 
     private void Update()
     {
-        if(spread_timer < 1.25)
+        if(spread_timer < 10)
         {
             SpreadFire();
             spread_timer += Time.deltaTime;
@@ -31,22 +30,16 @@ public class Fire : MonoBehaviour
 
     void SpreadFire()
     {
-        sphere_collider.radius += 0.5f;
-        float scale_value = 0.25f * Time.deltaTime;
-        Vector3 add_scale = new Vector3(scale_value, scale_value, scale_value);
-        transform.localScale += add_scale;
-        particles.startSpeed = new ParticleSystem.MinMaxCurve(2.5f, 10f);
-        particles.startSize = new ParticleSystem.MinMaxCurve(5f, 10f);
+        sphere_collider.radius += 0.1f * Time.deltaTime;
+        particles.startSize += 0.1f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name != "Train" && other.gameObject.name != "Player")
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.GetComponent<ObjectData>())
         {
-            if (other.gameObject.GetComponent<Rigidbody>() != null)
-            {
-                Destroy(other.gameObject);
-            }
+            Destroy(other.gameObject);
         }
     }
 }
