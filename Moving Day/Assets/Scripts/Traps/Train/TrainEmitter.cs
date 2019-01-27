@@ -28,6 +28,5 @@ public class TrainEmitter : MonoBehaviour
     {
         camera_shake.SetShake(7.0f, 0.075f);
         Instantiate(train, transform.position, transform.rotation);
-        Debug.Break();
     }
 }
