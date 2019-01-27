@@ -145,9 +145,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnCubeArea(int _index, Vector3 _force)
     {
-        GameObject obj = Instantiate(m_spawned[_index], new Vector3(Random.Range(transform.position.x - m_cubeWidth / 2, transform.position.y + m_cubeWidth / 2),
-            Random.Range(transform.position.y - m_cubeHeight / 2, transform.position.y + m_cubeWidth / 2),
-            Random.Range(transform.position.z - m_cubeDepth / 2, transform.position.z + m_cubeDepth / 2)), transform.rotation);
+        GameObject obj = Instantiate(m_spawned[_index], transform.position, transform.rotation);
         obj.GetComponent<Rigidbody>().AddForce(_force);
         int player = Random.Range(0, FindObjectOfType<GameManager>().GetPlayerCount());
         obj.GetComponent<ObjectData>().setOwner(player, player_mats[player]);
