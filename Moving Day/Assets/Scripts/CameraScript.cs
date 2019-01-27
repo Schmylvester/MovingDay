@@ -72,7 +72,10 @@ public class CameraScript : MonoBehaviour {
 		zoom.z -= furthestDistance / m_zoomFactor;
 		this.transform.localPosition = zoom;
 
-        GetComponent<Camera>().transform.LookAt(midpoint);
+        if (!camera_shake.isEarthquake())
+        {
+            GetComponent<Camera>().transform.LookAt(midpoint);
+        }
 
 	}
 
