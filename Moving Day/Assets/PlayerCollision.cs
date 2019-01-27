@@ -90,7 +90,7 @@ public class PlayerCollision : MonoBehaviour
     }
 
 
-    void OnCollisionStay(Collision col)
+    void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.GetComponent<PlayerCollision>() != null)
         {

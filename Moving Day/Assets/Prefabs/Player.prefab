@@ -1917,7 +1917,7 @@ MonoBehaviour:
   default_accel: 0.5
   moveSpeed: 4
   speedUpRate: 0.05
-  rotationSpeed: 10
+  rotationSpeed: 15
   playerAnimator: {fileID: 95143222355130848}
   jumpMax: 0
   groundPoint: {fileID: 4965582466954830}
