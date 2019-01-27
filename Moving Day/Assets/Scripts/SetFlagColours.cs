@@ -14,8 +14,6 @@ public class SetFlagColours : MonoBehaviour
 
     public void setFlagColours(int[] rooms)
     {
-        for (int i = 0; i < rooms.Length; i++)
-            Debug.Log(rooms[i]);
         for (int i = 0; i < flags.Length; i++)
             if (rooms[i] != -1)
             {
