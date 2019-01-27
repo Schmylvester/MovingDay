@@ -160,7 +160,7 @@ public class EventsManager : MonoBehaviour
         float new_z = Random.Range(lower.y, upper.y);
         Vector3 pos = new Vector3(new_x, fire.transform.position.y, new_z);
         Instantiate(fire, pos, fire.transform.rotation);
-        game_hud.SetEventText("HELP! FIRE! Move your stuff! QUICK!");
+        game_hud.SetEventText("HELP! FIRE!");
     }
     
     void ModifyPositions(GameObject fire, ref Vector2 upper, ref Vector2 lower)
