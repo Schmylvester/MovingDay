@@ -17,15 +17,27 @@ public class PlayerInteract : MonoBehaviour
 
     private Vector3 gobjLocalPos;
 
+    float colliderSize;
+    SphereCollider sphere;
+
     // Use this for initialization
     void Start()
     {
-
+        sphere = GetComponent<SphereCollider>();
+        colliderSize = sphere.radius;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(buffs.powerActive(Power_Ups.Juggernaut))
+        {
+            sphere.radius = colliderSize * 2;
+        }
+        else
+        {
+            sphere.radius = colliderSize;
+        }
         //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
         {
@@ -39,13 +51,13 @@ public class PlayerInteract : MonoBehaviour
         {
             if (grabbed)
             {
-                dropOverLapDelay += Time.deltaTime;             
+                dropOverLapDelay += Time.deltaTime;
             }
         }
 
-	    if (grabbedObj != null)
-	    {
-	        grabbedObj.transform.localPosition = gobjLocalPos;
+        if (grabbedObj != null)
+        {
+            grabbedObj.transform.localPosition = gobjLocalPos;
         }
     }
 
@@ -54,6 +66,8 @@ public class PlayerInteract : MonoBehaviour
     {
         if (grabbedObj != null)
         {
+            grabbedObj.GetComponent<BoxCollider>().enabled = true;
+
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
             grabbedObj.GetComponent<ObjectData>().putDown();
@@ -75,6 +89,7 @@ public class PlayerInteract : MonoBehaviour
             if (_grab_gobj.GetComponent<InteractObject>() != null)
             {
                 grabbedObj = _grab_gobj;
+                grabbedObj.GetComponent<BoxCollider>().enabled = false;
                 grabbedObj.transform.parent = transform;
                 grabbedObj.transform.rotation = transform.rotation;
 
@@ -84,7 +99,7 @@ public class PlayerInteract : MonoBehaviour
                 {
                     objectData.setOwner(movement.GetPlayerID());
                 }
-                switch(objectData.getWeight())
+                switch (objectData.getWeight())
                 {
                     case WeightClass.Heavy:
                         movement.ChangeSpeed(1, 0.3f);

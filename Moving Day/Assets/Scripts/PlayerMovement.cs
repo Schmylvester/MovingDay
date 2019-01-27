@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float startMoveSpeed;
     private float startSpeedUpRate;
 
+    [SerializeField] PlayerBuffs buffs;
     [SerializeField] float jumpMax;
     private bool grounded;
     [SerializeField] private Transform groundPoint;
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     float colTime = 0;
     private Vector3 colDir = Vector3.zero;
 
-    void Start ()
+    void Start()
     {
         moveSpeed = default_max;
         speedUpRate = default_accel;
@@ -69,6 +70,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentSpeed = moveSpeed;
             }
+            if (buffs.powerActive(Power_Ups.Big_Strong))
+            {
+                currentSpeed = moveSpeed;
+            }
         }
         else
         {
@@ -92,8 +97,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
-
+            if (buffs.powerActive(Power_Ups.Speed_Boost))
+                transform.Translate(dir * Time.deltaTime * currentSpeed * 1.3f, Space.World);
+            else
+                transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
         }
 
 
@@ -104,24 +111,24 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("Jumping", false);
 
-            if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
-            {
-                jumping = true;
-                grounded = false;
+            //if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
+            //{
+            //    jumping = true;
+            //    grounded = false;
 
-                jumpTarget = transform.position.y + 0.5f;
-
-                jumpSpeed = 2.5f;
-
-                playerAnimator.SetBool("Jumping", true);
-
-
-            }
-        }
-        else
-        {
+//                jumpTarget = transform.position.y + 0.5f;
+//
+  //              jumpSpeed = 2.5f;
+  //
+    //            playerAnimator.SetBool("Jumping", true);
+    //
+    //
+      //      }
+        //}
+        //else
+       // {
             if (jumping)
-            {            
+            {
                 jumpSpeed -= 0.1f;
                 transform.Translate(transform.up * Time.deltaTime * jumpSpeed, Space.World);
 
@@ -136,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpSpeed += 0.1f;
                 transform.Translate(-transform.up * Time.deltaTime * jumpSpeed, Space.World);
             }
-        }        
+        }
     }
 
 
@@ -156,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="_speed_up_rate">new speed up rate</param>
     public void ChangeSpeed(float _max_move_speed, float _speed_up_rate)
     {
-        Debug.Log("Changing speed");
         moveSpeed = _max_move_speed;
         speedUpRate = _speed_up_rate;
     }
@@ -208,19 +214,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
         {
-            collided = true;
-            currentSpeed = 0;
-            colDir = col.transform.position - transform.forward;
+            currentSpeed *= -1.3f;
         }
     }
 
-    void OnCollisionStay(Collision col)
-    {
-        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
-        {
-            collided = true;
-            currentSpeed = 0;
-            colDir = col.transform.position - transform.forward;
-        }
-    }
+    //void OnCollisionStay(Collision col)
+    //{
+    //if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
+    //{
+    //collided = true;
+    //currentSpeed *= -1;
+    //colDir = col.contacts[col.contacts.Length / 2].point - transform.position;
+    //}
+    //}
 }
