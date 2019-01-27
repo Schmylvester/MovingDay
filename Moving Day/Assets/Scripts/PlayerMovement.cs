@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float jumpSpeed = 0;
 
+    private bool collided = false;
+    float colTime = 0;
+    private Vector3 colDir = Vector3.zero;
+
     void Start ()
     {
         moveSpeed = default_max;
@@ -72,7 +76,25 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = 0;
         }
 
-        transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
+        //collision check
+        if (collided)
+        {
+            colTime += Time.deltaTime;
+            if (colTime > 0.05f)
+            {
+                collided = false;
+                colTime = 0;
+            }
+            else
+            {
+                transform.Translate(colDir * Time.deltaTime, Space.World);
+            }
+        }
+        else
+        {
+            transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
+
+        }
 
 
         //
@@ -184,17 +206,21 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject)
+        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
         {
+            collided = true;
             currentSpeed = 0;
+            colDir = col.transform.position - transform.forward;
         }
     }
 
     void OnCollisionStay(Collision col)
     {
-        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject)
+        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
         {
+            collided = true;
             currentSpeed = 0;
+            colDir = col.transform.position - transform.forward;
         }
     }
 }
