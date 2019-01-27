@@ -11,7 +11,7 @@ public class PowerUp : MonoBehaviour {
 	public void setPower(int set, Sprite _sprite)
     {
         index = set;
-        m_sprite.sprite = _sprite;
+     //   m_sprite.sprite = _sprite;
     }
 
     private void Update()
