@@ -8,7 +8,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject canvasGobj;
     [SerializeField] private Text boost;
 
-    private float showTime = 1.5f;
+    private float showTime = 1.2f;
     private float showTimer = 0;
     private Color lerpColor;
 
@@ -34,7 +34,7 @@ public class PlayerUI : MonoBehaviour
         }
         else
         {
-            boost.color = Color.Lerp(boost.color, Color.clear, Time.deltaTime * 3);
+            boost.color = Color.Lerp(boost.color, Color.clear, Time.deltaTime * 4);
         }
     }
 
