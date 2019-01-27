@@ -32,7 +32,7 @@ public class PowerUpManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.6f, 15.0f));
             float x = Random.Range(min_max_points[0].position.x, min_max_points[1].position.x);
             float z = Random.Range(min_max_points[0].position.z, min_max_points[1].position.z);
-            spawnPower(new Vector3(x, 0, z));
+            spawnPower(new Vector3(x, 0, z),4);
         }
     }
 

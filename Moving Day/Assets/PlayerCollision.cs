@@ -18,6 +18,7 @@ public class PlayerCollision : MonoBehaviour
 
     private float knockForceMultiplier;
 
+    [SerializeField] PlayerBuffs buffs;
 
     // Use this for initialization
     void Start()
@@ -58,35 +59,37 @@ public class PlayerCollision : MonoBehaviour
 
     public void KnockYou(Vector3 dirForce, WeightClass weight)
     {
-        if (!isKnocked)
+        if (!buffs.powerActive(Power_Ups.Weeble))
         {
-            knockForceDir = dirForce;
-            knockTimer = 0;
-            isKnocked = true;
-            knockSlowDown = 1;
+            if (!isKnocked)
+            {
+                knockForceDir = dirForce;
+                knockTimer = 0;
+                isKnocked = true;
+                knockSlowDown = 1;
 
-            playerAnimator.SetBool("KnockOver", true);
+                playerAnimator.SetBool("KnockOver", true);
+            }
+
+            knockForceMultiplier = 1;
+
+            switch (weight)
+            {
+                case WeightClass.Light:
+                    knockForceMultiplier = 5f;
+                    break;
+
+                case WeightClass.Medium:
+                    knockForceMultiplier = 7.5f;
+                    break;
+
+                case WeightClass.Heavy:
+                    knockForceMultiplier = 10f;
+                    break;
+            }
+
+            GetComponent<PlayerInteract>().DropObject();
         }
-
-        knockForceMultiplier = 1;
-
-        switch (weight)
-        {
-            case WeightClass.Light:
-                knockForceMultiplier = 5f;
-                break;
-
-            case WeightClass.Medium:
-                knockForceMultiplier = 7.5f;
-                break;
-
-            case WeightClass.Heavy:
-                knockForceMultiplier = 10f;
-                break;
-        }
-
-        GetComponent<PlayerInteract>().DropObject();
-
     }
 
 

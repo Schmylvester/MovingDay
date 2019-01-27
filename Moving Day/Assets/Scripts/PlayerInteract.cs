@@ -7,6 +7,7 @@ public class PlayerInteract : MonoBehaviour
     public GameObject grabbedObj;
     [SerializeField] private Transform grabObjectPos;
     [SerializeField] PlayerMovement movement;
+    [SerializeField] PlayerBuffs buffs;
 
     private float dropOverLapDelay;
     bool grabbed;
@@ -78,7 +79,12 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.transform.rotation = transform.rotation;
 
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
-                switch(grabbedObj.GetComponent<ObjectData>().getWeight())
+                ObjectData objectData = grabbedObj.GetComponent<ObjectData>();
+                if (buffs.powerActive(Power_Ups.Thief))
+                {
+                    objectData.setOwner(movement.GetPlayerID());
+                }
+                switch(objectData.getWeight())
                 {
                     case WeightClass.Heavy:
                         movement.ChangeSpeed(1, 0.3f);

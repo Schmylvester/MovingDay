@@ -1805,6 +1805,7 @@ MonoBehaviour:
   knockTimer: 0
   knockForceDir: {x: 0, y: 0, z: 0}
   playerAnimator: {fileID: 95143222355130848}
+  buffs: {fileID: 114777460211032420}
 --- !u!114 &114360400954180570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1953,6 +1954,7 @@ MonoBehaviour:
   grabbedObj: {fileID: 0}
   grabObjectPos: {fileID: 4560941224982396}
   movement: {fileID: 114906872803386540}
+  buffs: {fileID: 114777460211032420}
   playerAnimator: {fileID: 95143222355130848}
 --- !u!135 &135931904977250806
 SphereCollider:
