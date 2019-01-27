@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d08c009fc4c5e44da7e3fcc5d69e2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power_up: {fileID: 0}
+  power_up: {fileID: 114917218955317140}
 --- !u!114 &114906872803386540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1938,7 +1938,7 @@ MonoBehaviour:
   - {r: 0.23921569, g: 0.6509804, b: 0, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0.69411767, g: 0, b: 1, a: 1}
-  player: {fileID: 0}
+  player: {fileID: 114777460211032420}
 --- !u!114 &114957165226396208
 MonoBehaviour:
   m_ObjectHideFlags: 1
