@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     float colTime = 0;
     private Vector3 colDir = Vector3.zero;
 
-    private float startYPos;
+    public float startYPos;
 
     void Start()
     {
@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
         speedUpRate = default_accel;
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
+
+        startYPos = -0.065f;
 
         GameObject.Find("Main Camera").GetComponent<CameraScript>().addPoint(this.gameObject);
     }
@@ -133,7 +135,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        transform.position = transform.position + new Vector3(0, startYPos, 0);
+        transform.position = new Vector3(transform.position.x, startYPos, transform.position.z);
+    }
+
+
+    public void ForceYReset()
+    {
+        transform.position = new Vector3(transform.position.x, startYPos, transform.position.z);
     }
 
 

@@ -48,6 +48,7 @@ public class PlayerCollision : MonoBehaviour
             {
                 isKnocked = false;
                 playerAnimator.SetBool("KnockOver", false);
+                GetComponent<PlayerMovement>().ForceYReset();
             }
         }
     }
