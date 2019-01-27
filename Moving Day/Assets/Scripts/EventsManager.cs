@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventsManager : MonoBehaviour
 {
-    [SerializeField] private bool fire_s, earthquake_s;
+    [SerializeField] private bool fire_s, earthquake_s, train_s;
     [SerializeField] private GameObject small_fire, medium_fire, large_fire;
 
     [SerializeField] private Vector2 lower_bounds, upper_bounds;
@@ -41,6 +41,11 @@ public class EventsManager : MonoBehaviour
             InitialiseEarthquake();
             is_quake = true;
             earthquake_s = false;
+        }
+        if(train_s)
+        {
+            Train();
+            train_s = false;
         }
 
         if(is_quake)
