@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
             //set rotation to look at move direction
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir),
                 Time.deltaTime * rotationSpeed);
+
             playerAnimator.SetBool("Walking", true);
 
             if (currentSpeed < moveSpeed)
@@ -79,33 +80,18 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("Walking", false);
             currentSpeed = 0;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         }
 
-        //collision check
-        if (collided)
-        {
-            colTime += Time.deltaTime;
-            if (colTime > 0.05f)
-            {
-                collided = false;
-                colTime = 0;
-            }
-            else
-            {
-                transform.Translate(colDir * Time.deltaTime, Space.World);
-            }
-        }
+
+        if (buffs.powerActive(Power_Ups.Speed_Boost))
+            GetComponent<Rigidbody>().velocity = (dir * currentSpeed * 1.3f);
         else
-        {
-            if (buffs.powerActive(Power_Ups.Speed_Boost))
-                transform.Translate(dir * Time.deltaTime * currentSpeed * 1.3f, Space.World);
-            else
-                transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
-        }
+            GetComponent<Rigidbody>().velocity = (dir * currentSpeed);
 
-
-        //
         //jumping stuff
+
         grounded = Physics.Raycast(groundPoint.transform.position, -Vector3.up, 0.1f);
         if (grounded && !jumping)
         {
@@ -208,23 +194,4 @@ public class PlayerMovement : MonoBehaviour
     {
         return (lastDirection.normalized * currentSpeed) * 2;
     }
-
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
-        {
-            currentSpeed *= -1.3f;
-        }
-    }
-
-    //void OnCollisionStay(Collision col)
-    //{
-    //if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject && col.gameObject.GetComponent<ObjectData>() == null && col.gameObject.GetComponent<PlayerMovement>() == null)
-    //{
-    //collided = true;
-    //currentSpeed *= -1;
-    //colDir = col.contacts[col.contacts.Length / 2].point - transform.position;
-    //}
-    //}
 }

@@ -66,6 +66,10 @@ public class PlayerInteract : MonoBehaviour
     {
         if (grabbedObj != null)
         {
+            //swaps parent(important) collider to respect to collision size
+            GetComponent<CapsuleCollider>().enabled = true;
+            GetComponent<BoxCollider>().enabled = false;
+
             grabbedObj.GetComponent<BoxCollider>().enabled = true;
 
             grabbedObj.transform.parent = null;
@@ -88,6 +92,10 @@ public class PlayerInteract : MonoBehaviour
         {
             if (_grab_gobj.GetComponent<InteractObject>() != null)
             {
+                //swaps parent(important) collider to respect to collision size
+                GetComponent<CapsuleCollider>().enabled = false;
+                GetComponent<BoxCollider>().enabled = true;
+
                 grabbedObj = _grab_gobj;
                 grabbedObj.GetComponent<BoxCollider>().enabled = false;
                 grabbedObj.transform.parent = transform;
