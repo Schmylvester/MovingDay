@@ -22,6 +22,8 @@ public class VanAI : MonoBehaviour
     void Start()
     {
         transform.position = path[0].position;
+        GameObject.Find("Main Camera").GetComponent<CameraScript>().addPoint(this.gameObject);
+
     }
 
     // Update is called once per frame
@@ -38,7 +40,10 @@ public class VanAI : MonoBehaviour
                 break;
             case VanState.Driving_From:
                 if (!driveTo(path[2].position))
+                {
+                    GameObject.Find("Main Camera").GetComponent<CameraScript>().removePoint(this.gameObject);
                     Destroy(gameObject);
+                }
                 break;
         }
 

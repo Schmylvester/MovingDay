@@ -37,9 +37,10 @@ public class Fire : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
-        if (other.gameObject.GetComponent<ObjectData>())
+        ObjectData data = other.gameObject.GetComponent<ObjectData>();
+        if (data)
         {
-            Destroy(other.gameObject);
+            data.objectBurned();
         }
     }
 }

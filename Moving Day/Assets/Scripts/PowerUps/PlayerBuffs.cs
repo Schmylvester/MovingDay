@@ -29,5 +29,8 @@ public class PlayerBuffs : MonoBehaviour
         power_timers[(int)power] = time;
         power_up.gameObject.SetActive(true);
         power_up.enablePower(power);
+
+        GetComponent<PlayerUI>().SetBoostUI(power.ToString());
+
     }
 }

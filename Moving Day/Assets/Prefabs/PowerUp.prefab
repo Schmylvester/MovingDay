@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212123665775742226}
   - component: {fileID: 114422373582079802}
   - component: {fileID: 135893868914603148}
+  - component: {fileID: 114348455275815608}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: Untagged
@@ -35,13 +36,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1494072754323522}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0845351, y: 4.156086, z: -5.668361}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!114 &114348455275815608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1494072754323522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1b3d35ede1bce4baa1622324b1d839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
 --- !u!114 &114422373582079802
 MonoBehaviour:
   m_ObjectHideFlags: 1

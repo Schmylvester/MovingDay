@@ -67,8 +67,8 @@ public class PlayerInteract : MonoBehaviour
         if (grabbedObj != null)
         {
             //swaps parent(important) collider to respect to collision size
-            GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<BoxCollider>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = true;
 
             grabbedObj.GetComponent<BoxCollider>().enabled = true;
 
