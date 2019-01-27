@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     float colTime = 0;
     private Vector3 colDir = Vector3.zero;
 
+    private float startYPos;
+
     void Start()
     {
         moveSpeed = default_max;
@@ -130,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(-transform.up * Time.deltaTime * jumpSpeed, Space.World);
             }
         }
+
+        transform.position = transform.position + new Vector3(0, startYPos, 0);
     }
 
 
