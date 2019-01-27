@@ -32,6 +32,7 @@ public class EventsManager : MonoBehaviour
         if(fire_s)
         {
             Fire();
+            fire_s = false;
         }
         if(earthquake_s)
         {
