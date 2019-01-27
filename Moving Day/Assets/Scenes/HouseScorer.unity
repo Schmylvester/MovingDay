@@ -113,6 +113,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &97425065
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.147174
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.2540474
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.5725055
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4242838959351406, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731210283553638, guid: 984e92291c30ea441925febaed670241, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.26
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 984e92291c30ea441925febaed670241, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!224 &113592694 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224934912196576722, guid: c24f08d326f731743a5ae4f77496744a,

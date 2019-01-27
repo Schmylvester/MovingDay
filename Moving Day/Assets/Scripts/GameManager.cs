@@ -154,9 +154,6 @@ public class GameManager : MonoBehaviour
             if(roomScores[bestPlayer][room] > 0)
                 finalScores[bestPlayer]++;
         }
-        for (int i = 0; i < 4; i++)
-            Debug.Log(finalScores[i] + " : player " + i);
-
         winner = 0;
         for (int player = 1; player < scores.Count; player++)
         {

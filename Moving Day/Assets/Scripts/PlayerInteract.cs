@@ -111,10 +111,10 @@ public class PlayerInteract : MonoBehaviour
                 switch (objectData.getWeight())
                 {
                     case WeightClass.Heavy:
-                        movement.ChangeSpeed(1, 0.3f);
+                        movement.ChangeSpeed(2, 0.3f);
                         break;
                     case WeightClass.Medium:
-                        movement.ChangeSpeed(2.5f);
+                        movement.ChangeSpeed(3);
                         break;
                 }
                 grabbed = true;
