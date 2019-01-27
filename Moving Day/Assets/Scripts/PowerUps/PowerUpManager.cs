@@ -21,7 +21,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     [SerializeField] Transform[] min_max_points;
 
-    [SerializeField] GameObject[] power_ups_3d;
+   // [SerializeField] GameObject[] power_ups_3d;
 
     private void Awake()
     {
@@ -44,10 +44,7 @@ public class PowerUpManager : MonoBehaviour
         if (power == -1)
             power = Random.Range(0, (int)Power_Ups.COUNT);
 
-        GameObject power_up_instance = Instantiate(power_ups_3d[power], pos + new Vector3(0,0.5f,0), transform.rotation);
+        GameObject power_up_instance = Instantiate(power_up_prefab, pos + new Vector3(0,0.5f,0), m_camera.rotation);
         power_up_instance.GetComponent<PowerUp>().setPower(power, sprites[power]);
-
-        // GameObject power_up_instance = Instantiate(power_up_prefab, pos, m_camera.rotation);
-        // power_up_instance.GetComponent<PowerUp>().setPower(power, sprites[power]);
     }
 }
