@@ -18,7 +18,7 @@ public class CollideAudio : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name != "Player")
+        if(!collision.gameObject.CompareTag("Player"))
             GetComponent<AudioSource>().Play();
     }
 }
