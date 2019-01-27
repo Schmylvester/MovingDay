@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     List<int[]> roomScores = new List<int[]>();
     private List<int> scores = new List<int>();
 
-	// Use this for initialization
-	void Awake ()
+    // Use this for initialization
+    void Awake()
     {
         SetPlayerColours();
         scoreBar = FindObjectOfType<ScoreBar>();
@@ -55,26 +55,26 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         has_ended = false; //Uses C#'s version of Getters and Setters - REQUIRED
     }
-    
-	// Update is called every frame where 8s are better than 9s
-	void Update ()
+
+    // Update is called every frame where 8s are better than 9s
+    void Update()
     {
         StartGame();
-		if(has_started && !has_ended)
+        if (has_started && !has_ended)
         {
             GameClock();
             scoreBar.scoreUpdated();
             event_manager.EventChecker(Time.deltaTime);
         }
-        else if(has_ended)
+        else if (has_ended)
         {
             if (!winScene)
             {
-            EndGame();
-            winScene = true;
+                EndGame();
+                winScene = true;
             }
         }
-	}
+    }
 
     public string GetTimer()
     {
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         string timer = countdown_secs.ToString("0");
 
-        if(has_started)
+        if (has_started)
         {
             timer = clock_mins.ToString() + ":" + secs.ToString("00");
         }
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         return timer;
     }
 
-   void GameClock()
+    void GameClock()
     {
         clock_secs -= Time.deltaTime;
 
@@ -128,22 +128,23 @@ public class GameManager : MonoBehaviour
         else
         {
             has_started = true;
+            StartCoroutine(FindObjectOfType<VanSpawner>().startSpawningVans());
         }
     }
 
     void EndGame()
     {
         List<int> finalScores = new List<int>();
-        for(int i = 0; i < scores.Count; i++)
+        for (int i = 0; i < scores.Count; i++)
         {
             finalScores.Add(0);
         }
-        for(int room = 0; room < roomCount; room++)
+        for (int room = 0; room < roomCount; room++)
         {
             int bestPlayer = 0;
-            for(int player = 1; player < scores.Count; player++)
+            for (int player = 1; player < scores.Count; player++)
             {
-                if(roomScores[player][room] > roomScores[bestPlayer][room])
+                if (roomScores[player][room] > roomScores[bestPlayer][room])
                 {
                     bestPlayer = player;
                 }
@@ -161,7 +162,7 @@ public class GameManager : MonoBehaviour
             winScene = true;
         }
         SceneManager.LoadScene("WinScene");
-        Debug.Log("Player " + (winner + 1).ToString() + " wins!");        
+        Debug.Log("Player " + (winner + 1).ToString() + " wins!");
     }
 
     public void ChangePlayerScore(int value, int id, int room)
@@ -181,7 +182,7 @@ public class GameManager : MonoBehaviour
     {
         scores.Clear();
         roomScores.Clear();
-        for(uint i = 0; i < player_count; i++)
+        for (uint i = 0; i < player_count; i++)
         {
             scores.Add(0);
             roomScores.Add(new int[roomCount]);
@@ -191,7 +192,7 @@ public class GameManager : MonoBehaviour
 
     void InitialisePlayers(int player_count)
     {
-        for(uint i = 0; i < player_count; i++)
+        for (uint i = 0; i < player_count; i++)
         {
             GameObject player = Instantiate(player_prefab, spawn_points[i].position, spawn_points[i].rotation);
             camera_script.addPoint(player);
@@ -210,7 +211,7 @@ public class GameManager : MonoBehaviour
 
     public string TimerMode()
     {
-        if(countdown_secs > 0)
+        if (countdown_secs > 0)
         {
             return "Countdown";
         }
@@ -222,7 +223,7 @@ public class GameManager : MonoBehaviour
 
     Color PlayerColour(int id)
     {
-        switch(id)
+        switch (id)
         {
             case 1:
                 return Color.red;

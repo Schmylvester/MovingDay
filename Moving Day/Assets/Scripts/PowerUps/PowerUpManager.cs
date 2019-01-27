@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public enum Power_Ups
 {
@@ -16,14 +18,22 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] Transform m_camera;
     [SerializeField] GameObject power_up_prefab;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] Transform[] min_max_points;
 
     private void Awake()
     {
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
+        StartCoroutine(spawner());
+    }
+
+    IEnumerator spawner()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(0.6f, 15.0f));
+            float x = Random.Range(min_max_points[0].position.x, min_max_points[1].position.x);
+            float z = Random.Range(min_max_points[0].position.z, min_max_points[1].position.z);
+            spawnPower(new Vector3(x, 0, z));
+        }
     }
 
     public void spawnPower(Vector3 pos, int power = -1)

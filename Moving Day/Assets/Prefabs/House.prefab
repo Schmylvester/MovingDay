@@ -978,13 +978,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomMins:
   - {fileID: 4751839584734292}
-  - {fileID: 4451400954597862}
+  - {fileID: 4277981377200644}
   - {fileID: 4997412269070850}
   - {fileID: 4130934565685476}
-  - {fileID: 4277981377200644}
   RoomMaxs:
   - {fileID: 4618167053329766}
-  - {fileID: 4977471061120620}
+  - {fileID: 4481502102810358}
   - {fileID: 4450408825067688}
   - {fileID: 4431046226893396}
-  - {fileID: 4481502102810358}
