@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float startMoveSpeed;
     private float startSpeedUpRate;
 
+    [SerializeField] PlayerBuffs buffs;
     [SerializeField] float jumpMax;
     private bool grounded;
     [SerializeField] private Transform groundPoint;
@@ -27,7 +28,11 @@ public class PlayerMovement : MonoBehaviour
 
     private float jumpSpeed = 0;
 
-    void Start ()
+    private bool collided = false;
+    float colTime = 0;
+    private Vector3 colDir = Vector3.zero;
+
+    void Start()
     {
         moveSpeed = default_max;
         speedUpRate = default_accel;
@@ -55,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
             //set rotation to look at move direction
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir),
                 Time.deltaTime * rotationSpeed);
+
             playerAnimator.SetBool("Walking", true);
 
             if (currentSpeed < moveSpeed)
@@ -65,41 +71,50 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentSpeed = moveSpeed;
             }
+            if (buffs.powerActive(Power_Ups.Big_Strong))
+            {
+                currentSpeed = moveSpeed;
+            }
         }
         else
         {
             playerAnimator.SetBool("Walking", false);
             currentSpeed = 0;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         }
 
-        transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
 
+        if (buffs.powerActive(Power_Ups.Speed_Boost))
+            GetComponent<Rigidbody>().velocity = (dir * currentSpeed * 1.3f);
+        else
+            GetComponent<Rigidbody>().velocity = (dir * currentSpeed);
 
-        //
         //jumping stuff
+
         grounded = Physics.Raycast(groundPoint.transform.position, -Vector3.up, 0.1f);
         if (grounded && !jumping)
         {
             playerAnimator.SetBool("Jumping", false);
 
-            if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
-            {
-                jumping = true;
-                grounded = false;
+            //if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
+            //{
+            //    jumping = true;
+            //    grounded = false;
 
-                jumpTarget = transform.position.y + 0.5f;
-
-                jumpSpeed = 2.5f;
-
-                playerAnimator.SetBool("Jumping", true);
-
-
-            }
-        }
-        else
-        {
+//                jumpTarget = transform.position.y + 0.5f;
+//
+  //              jumpSpeed = 2.5f;
+  //
+    //            playerAnimator.SetBool("Jumping", true);
+    //
+    //
+      //      }
+        //}
+        //else
+       // {
             if (jumping)
-            {            
+            {
                 jumpSpeed -= 0.1f;
                 transform.Translate(transform.up * Time.deltaTime * jumpSpeed, Space.World);
 
@@ -114,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpSpeed += 0.1f;
                 transform.Translate(-transform.up * Time.deltaTime * jumpSpeed, Space.World);
             }
-        }        
+        }
     }
 
 
@@ -178,22 +193,5 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetPlayerForceDirection()
     {
         return (lastDirection.normalized * currentSpeed) * 2;
-    }
-
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject)
-        {
-            currentSpeed = 0;
-        }
-    }
-
-    void OnCollisionStay(Collision col)
-    {
-        if (GetComponent<PlayerInteract>().GetHeldObject() != col.gameObject)
-        {
-            currentSpeed = 0;
-        }
     }
 }

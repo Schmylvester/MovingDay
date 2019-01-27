@@ -14,7 +14,7 @@ public class WinScene : MonoBehaviour {
 	void Update () {
         if (iM.isButtonPressed(XboxButton.Start, 0))
         {
-            GameObject.Destroy(GameObject.Find("GameManager"));
+            Destroy(GameObject.Find("GameManager"));
             SceneManager.LoadScene("MainMenu");
         }
     }
