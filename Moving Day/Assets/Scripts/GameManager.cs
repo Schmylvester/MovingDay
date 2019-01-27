@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     List<int[]> roomScores = new List<int[]>();
     private List<int> scores = new List<int>();
 
-    int winner = -1;
+    List<int> winner = new List<int>();
 
     // Use this for initialization
     void Awake()
@@ -154,17 +154,22 @@ public class GameManager : MonoBehaviour
             if (roomScores[bestPlayer][room] > 0)
                 finalScores[bestPlayer]++;
         }
-        winner = 0;
+        winner.Add(0);
         for (int player = 1; player < scores.Count; player++)
         {
-            if (finalScores[player] > finalScores[winner])
+            if (finalScores[player] > finalScores[winner[0]])
             {
-                winner = player;
+                winner.Clear();
+                winner.Add(player);
+            }
+            if(finalScores[player] == finalScores[winner[0]])
+            {
+                if(!winner.Contains(player))
+                    winner.Add(player);
             }
             winScene = true;
         }
         SceneManager.LoadScene("WinScene");
-        Debug.Log("Player " + (winner + 1).ToString() + " wins!");
     }
 
     public void ChangePlayerScore(int value, int id, int room)
@@ -252,18 +257,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int getWinner()
+    public List<int> getWinners()
     {
-        if (winner == -1)
+        if (winner[0] == -1)
             Debug.LogError("As far as I know the game is not over");
         else
             return winner;
-        return -1;
+        return new List<int>();
     }
 
     void assignRooms()
     {
-        Debug.Log("Rooms: " + roomCount);
         int[] roomOwners = new int[roomCount];
         for (int i = 0; i < roomCount; i++)
         {
