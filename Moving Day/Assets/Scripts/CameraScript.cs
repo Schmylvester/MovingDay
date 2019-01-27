@@ -10,6 +10,9 @@ public class CameraScript : MonoBehaviour {
     [SerializeField] float m_zoomFactor = 1;
     [SerializeField] float max_zoomDistance;
     [SerializeField] float min_zoomDistance;
+    [SerializeField] float m_moveSpeed;
+    [SerializeField] float m_zoomSpeed;
+    Vector3 m_pointTo;
 
     // Use this for initialization
     void Start ()
@@ -38,6 +41,8 @@ public class CameraScript : MonoBehaviour {
 
         if (!camera_shake.isEarthquake())
         {
+            float posStep = m_moveSpeed * Time.deltaTime;
+            midpoint = Vector3.MoveTowards(parent.transform.position, midpoint, posStep);
             parent.transform.position = midpoint;
         }
 
@@ -71,17 +76,38 @@ public class CameraScript : MonoBehaviour {
 		zoom.y += furthestDistance / m_zoomFactor;
 		zoom.z -= furthestDistance / m_zoomFactor;
 		this.transform.localPosition = zoom;
+        //Debug.Log("This code is being run");
+
+        m_pointTo = zoom;
 
         if (!camera_shake.isEarthquake())
         {
             GetComponent<Camera>().transform.LookAt(midpoint);
         }
 
-	}
+        float step = m_zoomSpeed * Time.deltaTime;
+        this.transform.localPosition = Vector3.MoveTowards(this.transform.localPosition, m_pointTo, step);
+        if (this.transform.localPosition == zoom)
+        {
+            Debug.Log("This code is being run");
+        }
+
+    }
 
     public void addPoint(GameObject _newPoint)
     {
-        points.Add(_newPoint);
+        bool already_here = false;
+        foreach (GameObject p in points)
+        {
+            if (p == _newPoint)
+            {
+                already_here = true;
+            }
+        }
+        if (!already_here)
+        {
+            points.Add(_newPoint);
+        }
     }
 
     public void removePoint(GameObject _removedPoint)
