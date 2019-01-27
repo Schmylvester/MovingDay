@@ -7,19 +7,37 @@ public class PlayerInteract : MonoBehaviour
     public GameObject grabbedObj;
     [SerializeField] private Transform grabObjectPos;
     [SerializeField] PlayerMovement movement;
+    [SerializeField] PlayerBuffs buffs;
 
     private float dropOverLapDelay;
     bool grabbed;
 
+
+    [SerializeField] private Animator playerAnimator;
+
+    private Vector3 gobjLocalPos;
+
+    float colliderSize;
+    SphereCollider sphere;
+
     // Use this for initialization
     void Start()
     {
-
+        sphere = GetComponent<SphereCollider>();
+        colliderSize = sphere.radius;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(buffs.powerActive(Power_Ups.Juggernaut))
+        {
+            sphere.radius = colliderSize * 2;
+        }
+        else
+        {
+            sphere.radius = colliderSize;
+        }
         //delay so drop input isnt dected instantly (could be couroutine wait???)
         if (dropOverLapDelay > 0.25f)
         {
@@ -36,24 +54,35 @@ public class PlayerInteract : MonoBehaviour
                 dropOverLapDelay += Time.deltaTime;
             }
         }
+
+        if (grabbedObj != null)
+        {
+            grabbedObj.transform.localPosition = gobjLocalPos;
+        }
     }
 
 
-    void DropObject()
+    public void DropObject()
     {
         if (grabbedObj != null)
         {
+            //swaps parent(important) collider to respect to collision size
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = true;
+
+            grabbedObj.GetComponent<BoxCollider>().enabled = true;
+
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
-            grabbedObj.GetComponent<Rigidbody>().useGravity = true;
-            grabbedObj.GetComponent<ObjectData>().putDown();
-
+            grabbedObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+           grabbedObj.GetComponent<ObjectData>().putDown();
+            movement.resetSpeed();
 
             grabbedObj = null;
             grabbed = false;
             dropOverLapDelay = 0;
 
-            movement.resetSpeed();
+            playerAnimator.SetBool("IsHolding", false);
         }
     }
 
@@ -64,25 +93,35 @@ public class PlayerInteract : MonoBehaviour
         {
             if (_grab_gobj.GetComponent<InteractObject>() != null)
             {
+                //swaps parent(important) collider to respect to collision size
+                GetComponent<CapsuleCollider>().enabled = false;
+                GetComponent<BoxCollider>().enabled = true;
+
                 grabbedObj = _grab_gobj;
+                grabbedObj.GetComponent<BoxCollider>().enabled = false;
                 grabbedObj.transform.parent = transform;
                 grabbedObj.transform.rotation = transform.rotation;
-
+                grabbedObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
-                grabbedObj.GetComponent<Rigidbody>().useGravity = false;
-                grabbed = true;
-
-                ObjectData data = grabbedObj.GetComponent<ObjectData>();
-                data.pickedUp();
-                switch (data.getWeight())
+                ObjectData objectData = grabbedObj.GetComponent<ObjectData>();
+                if (buffs.powerActive(Power_Ups.Thief))
+                {
+                    objectData.setOwner(movement.GetPlayerID());
+                }
+                switch (objectData.getWeight())
                 {
                     case WeightClass.Heavy:
-                        movement.ChangeSpeed(2, 0.1f);
+                        movement.ChangeSpeed(2, 0.3f);
                         break;
                     case WeightClass.Medium:
                         movement.ChangeSpeed(3);
                         break;
                 }
+                grabbed = true;
+
+                gobjLocalPos = grabbedObj.transform.localPosition;
+
+                playerAnimator.SetBool("IsHolding", true);
             }
         }
     }
@@ -94,5 +133,16 @@ public class PlayerInteract : MonoBehaviour
         {
             GrabObject(_col.gameObject);
         }
+    }
+
+
+    public GameObject GetHeldObject()
+    {
+        if (grabbedObj != null)
+        {
+            return grabbedObj;
+        }
+
+        return null;
     }
 }

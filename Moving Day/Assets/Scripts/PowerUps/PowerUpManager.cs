@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public enum Power_Ups
 {
@@ -11,26 +13,41 @@ public enum Power_Ups
     COUNT
 }
 
+
 public class PowerUpManager : MonoBehaviour
 {
     [SerializeField] Transform m_camera;
     [SerializeField] GameObject power_up_prefab;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] Transform[] min_max_points;
+
+    [SerializeField] GameObject[] power_ups_3d;
 
     private void Awake()
     {
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
-        spawnPower(new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(0.0f, 4.0f)));
+        StartCoroutine(spawner());
+    }
+
+    IEnumerator spawner()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(0.6f, 0.7f));
+            float x = Random.Range(min_max_points[0].position.x, min_max_points[1].position.x);
+            float z = Random.Range(min_max_points[0].position.z, min_max_points[1].position.z);
+            spawnPower(new Vector3(x, 0, z));
+        }
     }
 
     public void spawnPower(Vector3 pos, int power = -1)
     {
         if (power == -1)
             power = Random.Range(0, (int)Power_Ups.COUNT);
-        GameObject power_up_instance = Instantiate(power_up_prefab, pos, m_camera.rotation);
+
+        GameObject power_up_instance = Instantiate(power_ups_3d[power], pos + new Vector3(0,0.3f,0), transform.rotation);
         power_up_instance.GetComponent<PowerUp>().setPower(power, sprites[power]);
+
+        // GameObject power_up_instance = Instantiate(power_up_prefab, pos, m_camera.rotation);
+        // power_up_instance.GetComponent<PowerUp>().setPower(power, sprites[power]);
     }
 }

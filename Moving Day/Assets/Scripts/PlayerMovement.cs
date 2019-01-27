@@ -5,62 +5,133 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private int playerID;
+
     [SerializeField] float default_max;
-    float moveSpeed;
     [SerializeField] float default_accel;
-    float speedUpRate;
+
+    [SerializeField] float moveSpeed;
+    [SerializeField] float speedUpRate;
     [SerializeField] float rotationSpeed;
-
-    private float currentSpeed;
-
-    private float startMoveSpeed;
-    private float startSpeedUpRate;
-
     [SerializeField] private Animator playerAnimator;
 
     private Vector3 lastDirection;
+    private float currentSpeed;
+    private float startMoveSpeed;
+    private float startSpeedUpRate;
 
+    [SerializeField] PlayerBuffs buffs;
+    [SerializeField] float jumpMax;
+    private bool grounded;
+    [SerializeField] private Transform groundPoint;
+    private bool jumping;
+    private float jumpTarget;
 
-    void Start ()
+    private float jumpSpeed = 0;
+
+    private bool collided = false;
+    float colTime = 0;
+    private Vector3 colDir = Vector3.zero;
+
+    void Start()
     {
         moveSpeed = default_max;
         speedUpRate = default_accel;
         startMoveSpeed = moveSpeed;
         startSpeedUpRate = speedUpRate;
-    }
-	
-	void Update ()
-	{
-	    InputManager iM = FindObjectOfType<InputManager>();
-        Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0, iM.getAxis(Axis.Left_Vertical, playerID));
 
-	    dir = dir.normalized;
-	    lastDirection = dir;
+        GameObject.Find("Main Camera").GetComponent<CameraScript>().addPoint(this.gameObject);
+    }
+
+
+    void Update()
+    {
+        //movement stuff --
+        InputManager iM = FindObjectOfType<InputManager>();
+
+        Vector3 dir = new Vector3(iM.getAxis(Axis.Left_Horizontal, playerID), 0,
+            iM.getAxis(Axis.Left_Vertical, playerID));
+
+        dir = dir.normalized;
+        lastDirection = dir;
 
         //speed up player
-        if (dir != Vector3.zero)
-	    {
+        if (dir != Vector3.zero && !GetComponent<PlayerCollision>().GetIsKnocked())
+        {
             //set rotation to look at move direction
-	        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir),
+                Time.deltaTime * rotationSpeed);
+
             playerAnimator.SetBool("Walking", true);
 
             if (currentSpeed < moveSpeed)
-	        {
-	            currentSpeed += speedUpRate;
-	        }
-	        else
-	        {
-	            currentSpeed = moveSpeed;
-	        }       
+            {
+                currentSpeed += speedUpRate;
+            }
+            else
+            {
+                currentSpeed = moveSpeed;
+            }
+            if (buffs.powerActive(Power_Ups.Big_Strong))
+            {
+                currentSpeed = moveSpeed;
+            }
         }
         else
         {
             playerAnimator.SetBool("Walking", false);
             currentSpeed = 0;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         }
 
-        transform.Translate(dir * Time.deltaTime * currentSpeed, Space.World);
+
+        if (buffs.powerActive(Power_Ups.Speed_Boost))
+            GetComponent<Rigidbody>().velocity = (dir * currentSpeed * 1.3f);
+        else
+            GetComponent<Rigidbody>().velocity = (dir * currentSpeed);
+
+        //jumping stuff
+
+        grounded = Physics.Raycast(groundPoint.transform.position, -Vector3.up, 0.1f);
+        if (grounded && !jumping)
+        {
+            playerAnimator.SetBool("Jumping", false);
+
+            //if (iM.buttonUp(XboxButton.A, GetComponent<PlayerMovement>().playerID))
+            //{
+            //    jumping = true;
+            //    grounded = false;
+
+//                jumpTarget = transform.position.y + 0.5f;
+//
+  //              jumpSpeed = 2.5f;
+  //
+    //            playerAnimator.SetBool("Jumping", true);
+    //
+    //
+      //      }
+        //}
+        //else
+       // {
+            if (jumping)
+            {
+                jumpSpeed -= 0.1f;
+                transform.Translate(transform.up * Time.deltaTime * jumpSpeed, Space.World);
+
+                if (transform.position.y >= jumpTarget)
+                {
+                    jumpSpeed += 0.1f;
+                    jumping = false;
+                }
+            }
+            else
+            {
+                jumpSpeed += 0.1f;
+                transform.Translate(-transform.up * Time.deltaTime * jumpSpeed, Space.World);
+            }
+        }
     }
+
 
     /// <summary>
     /// Set new maximum move speed for the player
@@ -100,6 +171,11 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = moveSpeed;
     }
 
+    public void SetID(int id)
+    {
+        playerID = id;
+    }
+
     /// <summary>
     /// returns player id
     /// </summary>
@@ -109,6 +185,10 @@ public class PlayerMovement : MonoBehaviour
         return playerID;
     }
 
+    bool areEightsBetterThanNines()
+    {
+        return true;
+    }
 
     public Vector3 GetPlayerForceDirection()
     {

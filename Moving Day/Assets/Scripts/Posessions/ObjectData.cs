@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum WeightClass
 {
+    None,
     Light,
     Medium,
     Heavy,
@@ -15,18 +16,17 @@ public class ObjectData : MonoBehaviour
     [SerializeField] WeightClass m_weight = WeightClass.Light;
     [SerializeField] int m_score;
     int m_owner;
-    bool in_house = false;
 
     private void Start()
     {
         manager = FindObjectOfType<GameManager>();
     }
 
-    public void setOwner(int to, Material mat)
+    public void setOwner(int to)
     {
         m_owner = to;
         foreach (MeshRenderer _renderer in GetComponentsInChildren<MeshRenderer>())
-            _renderer.material = mat;
+            _renderer.material = FindObjectOfType<ObjectManager>().getMaterial(to);
     }
 
     public WeightClass getWeight()
@@ -36,18 +36,14 @@ public class ObjectData : MonoBehaviour
 
     public void putDown()
     {
-        if (isInHouse())
-            manager.ChangePlayerScore(m_score, m_owner);
+        int room = FindObjectOfType<RoomIdentifier>().InRoom(transform.position);
+        if (room != -1)
+            manager.ChangePlayerScore(m_score, m_owner, room);
     }
     public void pickedUp()
     {
-        if (isInHouse())
-            manager.ChangePlayerScore(-m_score, m_owner);
-        in_house = true;
-    }
-
-    bool isInHouse()
-    {
-        return in_house;
+        int room = FindObjectOfType<RoomIdentifier>().InRoom(transform.position);
+        if (room != -1)
+            manager.ChangePlayerScore(-m_score, m_owner, room);
     }
 }
