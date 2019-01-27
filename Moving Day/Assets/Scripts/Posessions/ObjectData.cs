@@ -46,4 +46,12 @@ public class ObjectData : MonoBehaviour
         if (room != -1)
             manager.ChangePlayerScore(-m_score, m_owner, room);
     }
+
+    public void objectBurned()
+    {
+        int room = FindObjectOfType<RoomIdentifier>().InRoom(transform.position);
+        if (room != -1)
+            manager.ChangePlayerScore(-m_score, m_owner, room);
+        Destroy(gameObject);
+    }
 }
