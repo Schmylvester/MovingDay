@@ -134,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="_speed_up_rate">new speed up rate</param>
     public void ChangeSpeed(float _max_move_speed, float _speed_up_rate)
     {
+        Debug.Log("Changing speed");
         moveSpeed = _max_move_speed;
         speedUpRate = _speed_up_rate;
     }

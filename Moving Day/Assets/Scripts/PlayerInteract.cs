@@ -56,7 +56,7 @@ public class PlayerInteract : MonoBehaviour
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
             grabbedObj.GetComponent<ObjectData>().putDown();
-
+            movement.resetSpeed();
 
             grabbedObj = null;
             grabbed = false;
@@ -78,6 +78,15 @@ public class PlayerInteract : MonoBehaviour
                 grabbedObj.transform.rotation = transform.rotation;
 
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
+                switch(grabbedObj.GetComponent<ObjectData>().getWeight())
+                {
+                    case WeightClass.Heavy:
+                        movement.ChangeSpeed(1, 0.3f);
+                        break;
+                    case WeightClass.Medium:
+                        movement.ChangeSpeed(2.5f);
+                        break;
+                }
                 grabbed = true;
 
                 gobjLocalPos = grabbedObj.transform.localPosition;
