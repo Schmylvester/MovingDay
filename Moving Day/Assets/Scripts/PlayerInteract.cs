@@ -66,11 +66,16 @@ public class PlayerInteract : MonoBehaviour
     {
         if (grabbedObj != null)
         {
+            //swaps parent(important) collider to respect to collision size
+            GetComponent<CapsuleCollider>().enabled = true;
+            GetComponent<BoxCollider>().enabled = false;
+
             grabbedObj.GetComponent<BoxCollider>().enabled = true;
 
             grabbedObj.transform.parent = null;
             grabbedObj.GetComponent<Rigidbody>().AddForce(GetComponent<PlayerMovement>().GetPlayerForceDirection(), ForceMode.Impulse);
-            grabbedObj.GetComponent<ObjectData>().putDown();
+            grabbedObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+           grabbedObj.GetComponent<ObjectData>().putDown();
             movement.resetSpeed();
 
             grabbedObj = null;
@@ -88,11 +93,15 @@ public class PlayerInteract : MonoBehaviour
         {
             if (_grab_gobj.GetComponent<InteractObject>() != null)
             {
+                //swaps parent(important) collider to respect to collision size
+                GetComponent<CapsuleCollider>().enabled = false;
+                GetComponent<BoxCollider>().enabled = true;
+
                 grabbedObj = _grab_gobj;
                 grabbedObj.GetComponent<BoxCollider>().enabled = false;
                 grabbedObj.transform.parent = transform;
                 grabbedObj.transform.rotation = transform.rotation;
-
+                grabbedObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 grabbedObj.GetComponent<InteractObject>().SetGrabbedPos(grabObjectPos.position);
                 ObjectData objectData = grabbedObj.GetComponent<ObjectData>();
                 if (buffs.powerActive(Power_Ups.Thief))
