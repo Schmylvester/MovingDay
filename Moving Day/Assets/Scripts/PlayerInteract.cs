@@ -62,8 +62,10 @@ public class PlayerInteract : MonoBehaviour
     }
 
 
-    public void DropObject()
+    public void DropObject(AIPlayer ai = null)
     {
+        if (ai)
+            ai.setState(AIState.SeekingObject);
         if (grabbedObj != null)
         {
             //swaps parent(important) collider to respect to collision size
@@ -87,7 +89,7 @@ public class PlayerInteract : MonoBehaviour
     }
 
 
-    void GrabObject(GameObject _grab_gobj)
+    public void GrabObject(GameObject _grab_gobj)
     {
         if (grabbedObj == null)
         {

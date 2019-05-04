@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private int playerID;
+    public int playerID;
 
     [SerializeField] float default_max;
     [SerializeField] float default_accel;
 
-    [SerializeField] float moveSpeed;
+    public float moveSpeed;
     [SerializeField] float speedUpRate;
     [SerializeField] float rotationSpeed;
     [SerializeField] private Animator playerAnimator;
@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
 
         GameObject.Find("Main Camera").GetComponent<CameraScript>().addPoint(this.gameObject);
     }
-
 
     void Update()
     {
@@ -106,17 +105,17 @@ public class PlayerMovement : MonoBehaviour
             //    jumping = true;
             //    grounded = false;
 
-//                jumpTarget = transform.position.y + 0.5f;
-//
-  //              jumpSpeed = 2.5f;
-  //
-    //            playerAnimator.SetBool("Jumping", true);
-    //
-    //
-      //      }
-        //}
-        //else
-       // {
+            //                jumpTarget = transform.position.y + 0.5f;
+            //
+            //              jumpSpeed = 2.5f;
+            //
+            //            playerAnimator.SetBool("Jumping", true);
+            //
+            //
+            //      }
+            //}
+            //else
+            // {
             if (jumping)
             {
                 jumpSpeed -= 0.1f;
@@ -135,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        transform.position = new Vector3(transform.position.x, startYPos, transform.position.z);
+        ForceYReset();
     }
 
 
@@ -195,11 +194,6 @@ public class PlayerMovement : MonoBehaviour
     public int GetPlayerID()
     {
         return playerID;
-    }
-
-    bool areEightsBetterThanNines()
-    {
-        return true;
     }
 
     public Vector3 GetPlayerForceDirection()

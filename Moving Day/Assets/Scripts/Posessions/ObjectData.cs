@@ -22,6 +22,11 @@ public class ObjectData : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
     }
 
+    public int getOwner()
+    {
+        return m_owner;
+    }
+
     public void setOwner(int to)
     {
         m_owner = to;

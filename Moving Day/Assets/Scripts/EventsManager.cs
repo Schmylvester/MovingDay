@@ -26,7 +26,6 @@ public class EventsManager : MonoBehaviour
         camera_shake = FindObjectOfType<CameraShake>();
         game_hud = FindObjectOfType<GameHUD>();
         game_hud.SetEventText("");
-        Debug.Log(event_time);
 	}
 
     private void Update()
@@ -67,7 +66,7 @@ public class EventsManager : MonoBehaviour
         clock_seconds += dt;
         if(clock_seconds >= event_time)
         {
-            Events();
+            //Events();
         }
     }
 
